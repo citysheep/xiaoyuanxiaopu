@@ -1,0 +1,44 @@
+<%= simple_form_for @shop,:html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, :label => "小鋪名稱", :hint => "給自己的小鋪取一個好聽的名字" %>
+    <%= f.input :description, :as => :text, :input_html => { :class => "span4", :rows => "6" }, :label => "描述", :hint => "簡單描述一下自己的小鋪" %>
+  </div>
+  <%= f.input :lat, :as => :hidden %>
+  <%= f.input :lng, :as => :hidden %>
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span8">選擇位置<i class="icon-map-marker"></i></div>
+  </div>
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span7">
+      <div id="new-item-map"></div>
+    </div>
+    <div class="span1"></div>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary", :value => "提交" %>
+  </div>
+<% end %>
+<script type = "text/javascript">
+  var itemLocation = new google.maps.LatLng(<%= @shop.lat %>, <%= @shop.lng %>);
+  var itemMap = new MyWebMarket.Models.Map({
+    zoom: 12,
+    center: itemLocation,
+    location: itemLocation,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }); 
+  var itemMapView = new MyWebMarket.Views.MapView({
+    model: itemMap,
+    changable: false,
+    clickable: true
+  });
+  itemMapView.eventManager.bind("mapClick", function(event){
+    $("input#shop_lat").val(event.lat());
+    $("input#shop_lng").val(event.lng());
+  });
+
+  $("div#new-item-map").html($(itemMapView.render().el));
+</script> 

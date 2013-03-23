@@ -1,0 +1,14 @@
+<%= render "messages/navbar", :tab => "" %>
+<%= simple_form_for @message, :html => { :class => 'form-horizontal' } do |f| %>
+  <dl class="dl-horizontal">
+    <dt>收件人</dt>
+    <dd><%= link_to h(@recipient.name), user_path(@recipient) %></dd>
+  </dl>
+  <%= f.input :to, :as => :hidden %>
+  <%= f.input :subject, :label => "主題", :input_html => { :class => "span4"} %>
+  <%= f.input :body, :label => "信息", :input_html => { :class => "span4", :rows => "15"} %>
+  <div class="form-actions">
+    <%= submit_tag "清空", :type => :reset, :class => "btn btn-danger" %>
+    <%= f.button :submit, :class => "btn-primary", :value => "發送" %>
+  </div>
+<% end %>

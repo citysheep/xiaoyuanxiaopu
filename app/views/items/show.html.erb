@@ -1,0 +1,116 @@
+<% 
+	url = "http://www.mywebmarket.net/items/#{@item.id}" 
+	item = @item
+%>
+<% content_for :meta do %>
+	<meta property="fb:app_id" content="208690692477625" /> 
+	<meta property="og:title" content="<%= item.name %>只要$<%= item.price %>"/>
+	<meta property="og:image" content="<%= item.photo.url %>" /> 
+	<meta property="og:description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
+	<meta property="og:url" content="<%= url %>" />
+	<meta name="title" content="<%= item.name %>只要$<%= item.price %>"/>
+	<meta name="description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
+	<meta name="keywords" content="校園交易,跳蚤市場,二手,二手貨,二手買賣,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港,台灣,拍賣,跳蚤,市場,中文,<%= item.name %>,<%= item.category %>"/>
+<% end %>
+<div class="page-header">
+  <h1>
+  	<%= "#{item.name} $#{item.price}" %>
+    <% if item.category %>
+  	<span class="label label-info"><%= item.category.name %></span>
+  	<% end %> 
+ 	  <% if item.buyer %>
+	  <span class="label label-warning">已售出</span>
+  	<% end %>	
+  </h1>
+	<p>
+		<% if item.shop %>
+		<%= link_to item.shop.name, item.shop %> 發佈於 <%= item.created_at.localtime.to_s(:db) %> 
+		<% else %>			
+		<%= link_to item.user.name, item.user %> 發佈於 <%= item.created_at.localtime.to_s(:db) %> 
+		<% end %>
+	<fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like>  		
+	</p>		
+</div>
+<dl class="dl-horizontal">
+  <% if item.description && item.description != "" %>
+  <dt>賣家描述</dt>
+  <dd><%= item.description %></dd>
+  <% end%>
+  <dt>貨物相片</dt>
+	<dd>	
+		<div class="image">
+	  <% if item.photo.file? %>
+	  <%= image_tag item.photo.url, :class => "img-rounded" %>
+	  <% else %>
+	  <%= image_tag "noimage.jpg", :class => "img-rounded" %>
+	  <% end %>
+		</div>
+	</dd>
+</dl>
+<div class="row well item-action">
+	<div class="span2">
+	</div>
+	<div class="span6">
+		<div class="row">
+			<div class="btn-group">
+				<% if user_signed_in? && current_user.id == item.user.id %>
+					<%= link_to '更新商品資料', edit_item_path(item), :class => "btn btn-success" %>
+					<% if !item.buyer %>
+						<%= link_to '標為已售出', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
+					<% end %>
+				<% elsif !item.buyer %>
+				<%= link_to '我想買', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
+				<% end %>
+			</div>	
+		</div>
+		<div class="row">
+			<!-- JiaThis Button BEGIN -->
+			<div id="jiathis_style_32x32">
+				<a class="jiathis_button_fb"></a>
+				<a class="jiathis_button_tsina"></a>
+				<a class="jiathis_button_twitter hidden-phone"></a>
+				<a class="jiathis_button_renren hidden-phone"></a>
+				<a class="jiathis_button_googleplus"></a>
+				<a class="jiathis_button_gmail hidden-phone"></a>			
+				<a href="http://www.jiathis.com/share" class="hidden-phone jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				<a class="jiathis_counter_style"></a>
+			</div>
+			<script type="text/javascript" >
+			var jiathis_config={
+				url:"http://www.mywebmarket.net/items/<%= item.id %>",
+				summary:" 校園小鋪 － 打造屬於校園的二手貨平台。",
+				title:"<%= item.name %>只要$<%= item.price %>。",
+				pic: "<%= item.photo.url %>",
+				hideMore:false
+			}
+			</script>
+			<!-- JiaThis Button END -->	
+		</div>
+		<div class="row" id="item-location">
+			貨物位置: <%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [item.lat, item.lng]).full_address %>
+			<% if session[:location]%>
+			(<%= (item.distance_from(Geokit::LatLng.new(session[:location][:lat], session[:location][:lng]), :units => :kms) * 1000).to_i %>m)
+			<% end %>			
+		</div>
+		<div class="row" id="map"></div>
+	</div>
+</div>
+<div class="row center">
+	<div class="fb-comments" data-href="<%= url %>" data-num-posts="3" data-width="600"></div>
+</div>
+<script type = "text/javascript">
+	var itemLocation = new google.maps.LatLng(<%= item.lat %>, <%= item.lng %>);
+	var itemMap = new MyWebMarket.Models.Map({
+		zoom: 14,
+		center: itemLocation,
+		location: itemLocation,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});	
+	var itemMapView = new MyWebMarket.Views.MapView({
+		model: itemMap,
+		changable: false,
+		clickable: false
+	});
+	$("div#map").html($(itemMapView.render().el));
+</script>
+

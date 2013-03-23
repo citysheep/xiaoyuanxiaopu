@@ -1,0 +1,21 @@
+<%= simple_form_for(@category, :html => { :class => 'form-horizontal' }) do |f| %>
+  <legend>分類</legend>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.input :name, :wrapper => :prepend, :label => false do %> 
+    <%= content_tag :span, "分類名稱", :class => "add-on" %>
+    <%= f.input_field :name %>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary", :value => "確定" %>
+    <%= submit_tag "取消", :type => :reset, :class => "btn btn-danger" %>
+  </div>
+<% end %>

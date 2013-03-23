@@ -1,0 +1,5 @@
+<p>您好，<%= @resource.name %>， 歡迎加入 校園小鋪！</p>
+
+<p>請點擊以下鏈接確認您的帳號:</p>
+
+<p><%= link_to '確認帳號', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

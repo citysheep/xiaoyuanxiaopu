@@ -1,0 +1,49 @@
+<%= simple_form_for @item, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.input :name, :input_html => { :class => "span4"}, :label => "貨物名稱" %>
+  <%= f.input :price, :input_html => { :class => "span4"}, :label => "價格" %>
+  <% if current_user.shops %>
+  <%= f.input :shop_id, :label => "小鋪", :collection => current_user.shops, :prompt => "選擇一間你的小鋪" %>
+  <% end %>
+  <%= f.input :category_id, :label => "種類", :collection => Category.all, :prompt => "選擇貨物種類" %>
+  <%= f.input :photo, :input_html => { :class => "span4"}, :label => "相片" %>
+  <%= f.input :description, :as => :text, :input_html => { :class => "span4", :rows => "6" }, :label => "描述" %>
+  <% if !current_user.shops %>
+    <%= f.input :lat, :as => :hidden %>
+    <%= f.input :lng, :as => :hidden %>
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span8">選擇位置<i class="icon-map-marker"></i></div>
+    </div>
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span7">
+        <div id="new-item-map"></div>
+      </div>
+      <div class="span1"></div>
+    </div>
+  <% end %>  
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary", :value => "確定" %>
+    <%= submit_tag "取消", :type => :reset, :class => "btn btn-danger" %>
+  </div>
+<% end %>
+<script type = "text/javascript">
+  var itemLocation = new google.maps.LatLng(<%= @item.lat %>, <%= @item.lng %>);
+  var itemMap = new MyWebMarket.Models.Map({
+    zoom: 12,
+    center: itemLocation,
+    location: itemLocation,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }); 
+  var itemMapView = new MyWebMarket.Views.MapView({
+    model: itemMap,
+    changable: false,
+    clickable: true
+  });
+  itemMapView.eventManager.bind("mapClick", function(event){
+    $("input#item_lat").val(event.lat());
+    $("input#item_lng").val(event.lng());
+  });
+
+  $("div#new-item-map").html($(itemMapView.render().el));
+</script> 

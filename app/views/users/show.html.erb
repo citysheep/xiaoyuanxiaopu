@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h3><%= @user.name %></h3>
+</div>
+<% if @user.items.length == 0 %>
+	<p>還沒有發佈過二手貨</p>
+<% else %>
+	<p>共發佈<span class="badge badge-info"><%= @user.items.length %></span>件二手貨</p>
+		<table class="table table-hover">
+		<tbody>
+			<thead>
+				<tr>
+					<th>名稱</th>
+					<th>位置</th>
+				</tr>
+			</thead>
+			<% @user.items.each do |item| %>
+				<tr onClick="goToItem(<%=item.id%>)">
+					<td><%= item.name %></td>
+					<td><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [item.lat, item.lng]).full_address %></td>
+				</tr>
+			<% end %>
+		 </tbody>
+		</table>	
+<script type="text/javascript">
+	function goToItem(id){
+		location.href = "/items/" + id;
+	}
+</script>
+<% end %>

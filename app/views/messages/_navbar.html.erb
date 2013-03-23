@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1>我的信箱 <small>交流由此開始</small></h1>
+</div>
+<ul class="nav nav-pills">
+  <li class="<% if tab=="inbox" %>active<% end %>">
+    <%= link_to "收件箱", messages_path() %> 
+  </li>
+  <li class="<% if tab=="sent" %>active<% end %>">
+		<%= link_to "寄件備份", messages_path(:mailbox => :sent)%>
+  </li>
+</ul>

@@ -1,0 +1,73 @@
+div#new-item-map, div#map, div#map-modal, div#shop-map-modal {
+	div#map-canvas{
+		height: 350px;
+		}
+	}
+
+div#map {
+	div#map-canvas{
+		height: 200px;
+		}
+	}
+
+div#item-location {
+	margin-top: 15px;
+	}
+
+div.item {
+	position: relative;
+	margin: 15px 0;
+	padding: 20px;
+	background-color: white;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	}
+
+div.item-action {
+	div.btn-group {
+		margin-bottom: 15px;
+		}
+	}
+
+div.center {
+	text-align: center;
+	}
+
+tr.warning {
+	font-weight: bold;
+	}
+
+dl.show-message {
+	dd {
+		margin-bottom: 15px;
+		}
+	}
+
+img.thumbnail {
+	width: 300px;
+	height: 200px
+	}	
+
+div.item, table, div.shop {
+  a.item-name, a.shop-name {
+	  &:link, &:visited {
+      	text-decoration: none;
+      	color: #393E40;
+   	  	}
+  	  &:hover, &:active {
+    	color: #0078a3;
+  		cursor: pointer;
+		}
+	}
+  }	
+
+div.item-image-span {
+  padding-right: 20px;
+  }  
+  
+div#share-bar {
+  margin-left: 15px;
+  }  
+  

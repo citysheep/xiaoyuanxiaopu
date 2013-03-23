@@ -1,0 +1,9 @@
+<div class="hero-unit">
+  <h1 class="hidden-phone"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded" %> 校園小鋪 <small>開小鋪，交朋友</small></h1>
+  <p></p>
+  <p>歡迎來到校園小鋪，一個屬於校園的二手貨交易平台。在這裡，你可以經營一家屬於自己的校園小鋪，賣二手貨，交朋友，享受校園生活。</p>
+	<div>
+		<%= link_to "創建我的小鋪", new_shop_path, {:class => "btn btn-info"} %>
+		<%= link_to "我附近的小鋪", shops_path, {:class => "btn btn-info"} %>
+	</div>
+</div>

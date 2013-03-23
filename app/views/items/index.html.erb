@@ -1,0 +1,102 @@
+<% content_for :meta do %>
+	<meta property="fb:app_id" content="208690692477625" /> 
+	<meta property="og:title" content=" 校園小鋪 － 打造屬於校園的二手貨平台。。"/>
+	<meta property="og:description" content="完美結合地圖模式，打造屬於校園的二手貨平台。"/>
+	<meta name="title" content=" 校園小鋪 － 打造屬於校園的二手貨平台。。"/>
+	<meta name="description" content="完美結合地圖模式，打造屬於校園的二手貨平台。"/>
+	<meta name="keywords" content=" 校園小鋪,二手,二手貨,二手買賣,二手市場,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港二手市場,台灣二手市場,中文二手市場,拍賣,跳蚤,市場,中文"/>
+<% end %>
+<div class="row">
+	<div class="span7">
+    	<%= link_to "發佈新貨", new_item_path, :class => "btn btn-warning" %>
+		<% if @address %>
+		當前位置：<%=@address%> <a data-toggle="modal" data-target="#map-modal">更改</a>
+		<% else %>
+		<a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">顯示我附近的二手貨</a>
+		<% end %>
+		<div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>請選擇您的當前位置</h3>
+		  </div>
+		  <div class="modal-body">
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn btn-primary confirm">確定</a>
+		    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+		  </div>
+		</div>
+	</div>
+	<select class="span2 category-select">
+		<option value="">所有類別</option>
+		<% Category.all.each do |category| %>
+		<option value="<%=category.id%>"><%=category.name%></option>
+		<% end %>
+	</select>
+</div>
+<%= render 'items' %>
+<script type = "text/javascript">
+	center = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
+	var map = new MyWebMarket.Models.Map({
+		zoom: 12,
+		center: center,
+		location: center,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});		
+
+	var mapPopup = $("div#map-modal > div.modal-body");
+	var mapView;
+	$('#map-modal').on('shown', function () {
+		if(!mapView){
+			mapView = new MyWebMarket.Views.MapView({
+				model: map,
+				clickable: true,
+				changable: true
+		    });
+			mapPopup.html($(mapView.render().el));		
+		}
+	});
+
+	<% if !@address && !@cid %>
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(
+			function( position ){
+				map.set("location", new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+				setUrl(map, "<%= @cid %>");
+			},
+			function( error ){
+			// TODO
+			}
+		);
+	} else {
+		$("#map-modal").show();
+	}
+	<% end %>
+
+	//TODO - use backbone to handle all the views - should be ajax
+	$("div.modal-footer > a.confirm").click(function(){
+ 		setUrl(map, "<%= @cid %>");
+	});
+
+	$("select.category-select").change(function(){
+		setUrl(map, this.value);
+	});
+
+	function setUrl(model, cid) {
+		var locationParam = "";
+		var categoryParam = "";
+
+		if(cid!=""){
+			categoryParam = "categories/" + cid + "/";
+		}
+
+		if(model){
+			var latLng = model.get("location");
+			if(latLng){
+				locationParam = "?lat=" + latLng.lat() + "&lng=" + latLng.lng();
+			}		
+		}
+
+		location.href = "/" + categoryParam + "items" + locationParam;
+	}	
+</script>

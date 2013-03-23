@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1>更改密碼</h1>
+</div>
+<%= simple_form_for resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put } do |f| %>
+  <%= f.hidden_field :reset_password_token %>
+  <%= f.input :password, :label => "新密碼" %>
+  <%= f.input :password_confirmation, :label => "確認新密碼" %>
+  <%= f.button :submit, :class => "btn-primary", :value => "更改密碼" %>
+<% end %>
+<%= render :partial => "devise/shared/links" %>

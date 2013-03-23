@@ -1,0 +1,26 @@
+<%= render "messages/navbar", :tab => "sent" %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>主題</th>
+      <th>收件人</th>
+      <th>寄件時間</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+	<% if @messages.size > 0 %>
+	  	<% @messages.each do |message| %>
+	    <tr>
+	      <td><%= link_to h(message.subject), message %></td>
+	      <td><%= link_to h(message.recipient.name), user_path(message.recipient) %></td>
+	      <td><%=h message.created_at.to_s(:long) %></td>
+	      <td><%= link_to "刪除", message, :confirm => '確定刪除這條信息?', :method => :delete, :class => "btn btn-danger" %></td>
+	    </tr>
+	    <% end %>
+	<% else %>
+  		<tr><td colspan="4">無信息</td></tr>
+	<% end %>
+  </tbody>
+</table>
+

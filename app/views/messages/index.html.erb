@@ -1,0 +1,5 @@
+<% if params[:mailbox] == "sent" %>
+	<%= render :partial => "sent" %>
+<% else %>
+	<%= render :partial => "inbox" %>
+<% end %>

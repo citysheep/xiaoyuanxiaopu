@@ -1,0 +1,26 @@
+<%= render "messages/navbar", :tab => "" %>
+<div class="span6">
+	<dl class="dl-horizontal show-message">
+		<dt>寄件人</dt>
+		<dd>
+			<%= link_to h(@message.sender.name), user_path(@message.sender) %>
+		</dd>
+		<dt>收件時間</dt>
+		<dd><%= @message.created_at.to_s(:long) %></dd>
+		<dt>收件人</dt>
+		<dd><%= link_to h(@message.recipient.name), user_path(@message.recipient) %></dd>	
+		<dt>主題</dt>
+		<dd><%=h @message.subject %></dd>		
+		<dt>信息</dt>
+		<dd class="well">
+	 		 <%= @message.body %>
+		</dd>		
+		<dt></dt>
+		<dd>
+			<% if @message.recipient == @user %>
+			<%= link_to "回覆", new_message_path(:reply_to => @message), :class => "btn btn-primary" %>
+			<% end %>
+			<%= link_to "刪除", @message, :confirm => '確定刪除這條信息?', :method => :delete, :class => "btn btn-danger" %>
+		</dd>
+	</dl>
+</div>

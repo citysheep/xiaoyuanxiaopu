@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded" %> 校園小鋪歡迎你！</h1>
+</div>
+<ul class="nav nav-tabs">
+  <li class="<% if tab=="login" %>active<% end %>"><a href="#login" data-toggle="tab">用戶登入</a></li>
+  <li class="<% if tab=="register" %>active<% end %>"><a href="#register" data-toggle="tab">新用戶註冊</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane <% if tab=="login" %>active<% end %>" id="login">
+    <div class="span3">
+  	<%= simple_form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
+    		<%= f.input :email, :label => "電子郵箱" %>
+    		<%= f.input :password, :label => "密碼" %>
+    		<%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => "記住密碼" %>
+  	  	<%= f.button :submit, :class => "btn-primary", :value => "登入" %>
+  	<% end %>
+    <%= render :partial => "devise/shared/links" %>
+    </div>
+    <div>
+      <p>如果你没有网站帐号，你还可以用人人网帐号登录本网站：</p>
+      <a href="/auth/renren"><img style= "border:0px" src="/assets/renren.png"/></a>
+    </div>
+  </div>  
+  <div class="tab-pane <% if tab=="register" %>active<% end %>" id="register">
+    <div class="span3">
+  	<%= simple_form_for resource, :as => resource_name, :url => registration_path(resource_name) do |f| %>
+  	  <%= f.input :name, :label => "用戶名" %>
+  	  <%= f.input :email, :label => "電子郵箱" %>
+  	  <%= f.input :password, :label => "密碼" %>
+  	  <%= f.input :password_confirmation, :label => "確認密碼" %>
+  	  <%= f.button :submit, :class => "btn-primary", :value => "提交" %>
+  	<% end %>
+    <%= render :partial => "devise/shared/links" %>
+    </div>
+    <div>
+      <p>如果你没有网站帐号，你还可以用人人网帐号登录本网站：</p>
+      <a href="/auth/renren"><img style= "border:0px" src="/assets/renren.png"/></a>
+    </div>
+  </div>
+</div>

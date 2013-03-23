@@ -1,0 +1,59 @@
+<% if @items.length == 0 %><h4>暂无货物，快来<%= link_to "发布一个", new_item_path %>吧！</h4><% end %>
+<% @items.each do |item| %>
+<% 
+	url = "http://www.mywebmarket.net/items/#{item.id}" 
+%>
+<div class="row item">
+	<div class="row">
+		<div class="span1"></div>
+		<div class="span2 item-image-span">
+		  <a href="/items/<%= item.id %>">
+		  <% if item.photo.file? %>
+		  <%= image_tag item.photo.url(:small), :class=>"img-rounded" %>
+		  <% else %>
+		  <%= image_tag "noimage.jpg", :class=>"img-rounded" %>
+		  <% end %>
+		  </a>
+		</div>
+		<div class="span4">
+			<div class="row">
+		  	<h3>
+		  	  <%= link_to "#{item.name} $#{item.price}", item, :class=>"item-name" %>
+		  	  <% if item.category %>
+		  	  	<span class="label label-info"><%= item.category.name %></span>
+			  <% end %>
+			  <% if item.buyer %>
+			  	<span class="label label-warning">已售出</span>
+			  <% end %>
+				<fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like>
+		  	</h3>
+			</div>	
+			<div class="row">
+				<p><%= item.created_at.localtime.to_s(:db) %>
+				<% if item.shop %>
+				<%= link_to item.shop.name, item.shop %>
+				<% else %>			
+				<%= link_to item.user.name, item.user %>
+				<% end %>
+				發佈</p>
+			</div>			
+			<% if item.description && item.description != "" %>
+			<div class="row"><p>描述: <%= item.description %></p></div>
+			<% end %>
+			<div class="row">
+				<%= link_to '貨物詳情', item, :class => "btn btn-info" %>
+				<% if user_signed_in? && current_user.id == item.user.id %>
+					<%= link_to '更新資料', edit_item_path(item), :class => "btn btn-success" %>
+					<% if !item.buyer %>
+						<%= link_to '標為已售出', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
+					<% end %>
+				<% elsif !item.buyer %>
+					<%= link_to '我想買', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
+				<% end %>
+			</div>				
+		</div>
+	</div>	
+</div>
+<% end %>
+<%= will_paginate @items, :previous_label => "上一頁", :next_label => "下一頁" %>
+ 

@@ -1,0 +1,122 @@
+<% 
+  shop = @shop
+  url = "http://www.mywebmarket.net/shops/#{shop.id}" 
+%>  
+<% content_for :meta do %>
+  <meta property="og:title" content="<%= shop.name %>"/>
+  <meta property="og:description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
+  <meta property="og:url" content="<%= url %>" />
+  <meta name="title" content="<%= shop.name %>" />
+  <meta name="description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
+  <meta name="keywords" content="校園交易,跳蚤市場,二手,二手貨,二手買賣,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港,台灣,拍賣,跳蚤,市場,中文,<%= shop.name %>,<%= shop.description %>"/>
+<% end %>
+<div class="page-header">
+  <h1><%= shop.name %> <small><%= shop.items.count %>件貨</small> <fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like></h1>
+  <% if user_signed_in? && current_user.id == shop.user.id %>
+    <%= link_to '更新小鋪資料', edit_shop_path(shop), :class => "btn btn-success" %>
+    <%= link_to "發佈新貨", new_item_path, :class => "btn btn-info" %>
+    <!-- <%= link_to '關閉小鋪', shop, :confirm => '您確認要刪除這間小鋪嗎?', :method => :delete, :class => "btn btn-danger" %> -->
+  <% else %>
+  <div id="follow-btn"></div>
+  <% end %>
+</div>
+<dl class="dl-horizontal">
+  <dt>掌櫃大名</dt>
+  <dd><%= link_to shop.user.name, shop.user %></dd>
+  <dt>開業時間</dt>
+  <dd><%= shop.created_at.localtime.to_date.to_s(:db) %></dd>
+  <dt>賣出貨物</dt>
+  <% soldItems = shop.items.select {|i| i.buyer } %>
+  <dd><span class="badge badge-important"><%= soldItems.count %>件</span></dd>
+  <dt>銷售業績</dt>
+  <dd><span class="badge badge-info">$<%= soldItems.collect {|i| i.price }.inject(:+) || 0 %></span></dd>
+  <% if shop.description && shop.description != "" %>
+  <dt>自我介紹</dt>
+  <dd><%= shop.description %></dd>
+  <% end%>
+  <dt>小鋪位置</dt>
+  <dd>
+    <a data-toggle="modal" data-target="#shop-map-modal"><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [shop.lat, shop.lng]).full_address %></a>
+    <% if session[:location]%>
+    (<%= (shop.distance_from(Geokit::LatLng.new(session[:location][:lat], session[:location][:lng]), :units => :kms) * 1000).to_i %>m)
+    <% end %>
+  </dd>
+</dl>
+<div class="row" id="share-bar">
+	<!-- JiaThis Button BEGIN -->
+	<div id="jiathis_style_32x32">
+		<a class="jiathis_button_fb"></a>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_twitter hidden-phone"></a>
+		<a class="jiathis_button_renren hidden-phone"></a>
+		<a class="jiathis_button_googleplus"></a>
+		<a class="jiathis_button_gmail hidden-phone"></a>			
+		<a href="http://www.jiathis.com/share" class="hidden-phone jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+		<a class="jiathis_counter_style"></a>
+	</div>
+	<script type="text/javascript" >
+	var jiathis_config={
+		url:"<%= url %>",
+		summary:"校園小鋪 － 打造屬於校園的二手貨平台。",
+		title:"<%= shop.name %>",
+    <% unless shop.items.last.nil? %>
+      pic: "<%= shop.items.last.photo.url %>",
+		<% end %>
+    hideMore:false
+	}
+	</script>
+	<!-- JiaThis Button END -->	
+</div>
+<div class="modal hide fade" tabindex="-1" role="dialog" id="shop-map-modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= shop.name %>的位置</h3>
+  </div>
+  <div class="modal-body" id="shop-map">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">關閉</a>
+  </div>
+</div>
+<script type = "text/javascript">
+  var shopLocation = new google.maps.LatLng(<%= shop.lat %>, <%= shop.lng %>);
+  var shopMap = new MyWebMarket.Models.Map({
+    zoom: 14,
+    center: shopLocation,
+    location: shopLocation,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }); 
+  var shopMapView;
+  $('#shop-map-modal').on('shown', function () {
+    if(!shopMapView){
+      shopMapView = new MyWebMarket.Views.MapView({
+        model: shopMap,
+        clickable: false,
+        changable: false
+        });
+      $("div#shop-map").html($(shopMapView.render().el));    
+    }
+  });
+  
+  var follow = new MyWebMarket.Models.Follow({shop_id: <%= shop.id %>});
+  <% if user_signed_in? && follow = shop.follows.select {|follow| follow.user_id == current_user.id}.first %>
+    follow.id = <%= follow.id %>;
+  <% end %>
+  
+  // TODO - refactor using backbone
+  var followView = new MyWebMarket.Views.FollowView({model: follow});
+  $("div#follow-btn").html($(followView.render().el));
+
+  follow.bind("change:id", renderFollowButtn);
+  follow.bind("destroy", function(){
+    this.id = null;
+    renderFollowButtn();
+  });
+
+  function renderFollowButtn(){
+    $("div#follow-btn").html($(followView.render().el));
+    followView.delegateEvents();
+  }
+
+</script>
+<%= render "items/items" %>
