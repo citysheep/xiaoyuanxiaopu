@@ -15,11 +15,11 @@ group :assets do
   gem 'sass-rails', "3.1.4"
   gem 'execjs'
   gem 'libv8', '3.3.10.4'
-  # gem 'therubyracer', '0.10.2'
   gem 'uglifier'
 end
 
 group :production do
+  gem 'therubyracer', '0.10.2'
   gem "mysql2"
 end
 
