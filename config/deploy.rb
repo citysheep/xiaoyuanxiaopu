@@ -62,7 +62,7 @@ task :deploy => :environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
-
+    queue 'chown -R www-data /var/www/rails/webmarket'
     to :launch do
       queue 'touch tmp/restart.txt'
     end
