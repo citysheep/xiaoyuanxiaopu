@@ -115,6 +115,8 @@ GEM
     omniauth (1.0.3)
       hashie (~> 1.2)
       rack
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -219,6 +221,7 @@ DEPENDENCIES
   libv8 (= 3.3.10.4)
   mina
   mysql2
+  omniauth-facebook
   omniauth-qzone
   omniauth-renren
   paperclip (~> 2.7.0)
