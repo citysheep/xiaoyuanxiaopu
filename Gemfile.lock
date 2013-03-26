@@ -105,7 +105,6 @@ GEM
     multipart-post (1.2.0)
     mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
-    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -117,16 +116,13 @@ GEM
       rack
     omniauth-facebook (1.4.0)
       omniauth-oauth2 (~> 1.0.2)
-    omniauth-oauth (1.0.1)
-      oauth
-      omniauth (~> 1.0)
     omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-qzone (1.0.0.rc)
+    omniauth-qq (0.2.1)
       multi_json
-      omniauth (~> 1.0.0.rc2)
-      omniauth-oauth (~> 1.0.0.rc2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-renren (1.0.0.rc2.1)
       omniauth (~> 1.0.0.rc2)
       omniauth-oauth2 (~> 1.0.0.rc2)
@@ -222,7 +218,7 @@ DEPENDENCIES
   mina
   mysql2
   omniauth-facebook
-  omniauth-qzone
+  omniauth-qq
   omniauth-renren
   paperclip (~> 2.7.0)
   rails (= 3.1.0)
