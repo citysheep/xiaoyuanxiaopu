@@ -26,7 +26,6 @@ test:
   pool: 5
   username: mywebmar_dba
   password: cuhk2012
-  socket: /tmp/mysql.sock
 
 production:
   adapter: mysql2
@@ -36,4 +35,3 @@ production:
   pool: 5
   username: root
   password: cuhk2012
-  socket: /tmp/mysql.sock
