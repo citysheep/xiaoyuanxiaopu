@@ -1,23 +1,0 @@
-o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1354804907.804438:@value{	I"length:EFiI"digest;
-F"%f6530cdf076f354e1bc9d65cb0e38e06I"source;
-FI"/* line 1, ../../../app/assets/stylesheets/bkp-old-dec06/messages.css.scss */
-div.message-box {
-  margin: 20px 0px 0px 30px;
-}
-/* line 2, ../../../app/assets/stylesheets/bkp-old-dec06/messages.css.scss */
-div.message-box div.header {
-  font-size: 24px;
-  margin-bottom: 30px;
-}
-/* line 5, ../../../app/assets/stylesheets/bkp-old-dec06/messages.css.scss */
-div.message-box div.header span.selected {
-  font-weight: bold;
-}
-
-/* line 11, ../../../app/assets/stylesheets/bkp-old-dec06/messages.css.scss */
-a.unread {
-  font-weight: bold;
-}
-;
-FI"_version;
-F"%4e9d692303b54cc418d37de632934a62

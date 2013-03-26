@@ -1,12 +1,0 @@
-o: ActiveSupport::Cache::Entry	:@created_atf1363420866.967337:@value{	I"length:EFi�I"digest;F"%f0f39c96f1326e2b04bbf99e66f62c11I"source;FI"�var jiathis_config={
-	summary:" 校園小鋪 － 打造屬於大學的二手交易平台。",
-	// pic: "<%= item.photo.url %>",
-	hideMore:false
-}
-
-function setshare(url, title) {
-  jiathis_config.title = title;
-  jiathis_config.url = url;
-}
-;
-;TI"_version;F"%6b728d5584a5e476617baade7b2ebd90:@expires_in0:@compressedF
