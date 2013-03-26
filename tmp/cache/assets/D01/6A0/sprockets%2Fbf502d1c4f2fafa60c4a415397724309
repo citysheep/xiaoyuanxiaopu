@@ -1,0 +1,13 @@
+o: ActiveSupport::Cache::Entry	:@created_atf1356143432.070941:@value{	I"length:EFi©I"digest;F"%a6de4d405bada990a80bfcf1b5d1ec4fI"source;FI"©window.MyWebMarket = {
+  Models: {},
+  Collections: {},
+  Views: {},
+  Routers: {},
+  init: function() {
+  }
+};
+
+$(document).ready(function(){
+  MyWebMarket.init();
+});
+;FI"_version;F"%12b0e87e1f499171b4bea11828e86064:@expires_in0:@compressedF

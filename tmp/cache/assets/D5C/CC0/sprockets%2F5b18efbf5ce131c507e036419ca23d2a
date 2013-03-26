@@ -1,0 +1,30 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1354804907.792413:@value{	I"length:EFiýI"digest;
+F"%01e8cd953e8255d072284ead1422bbb3I"source;
+FI"ý/* line 1, ../../../app/assets/stylesheets/bkp-old-dec06/jsnotify.css.scss */
+div#notification {
+  height: 50px;
+  display: none;
+}
+/* line 2, ../../../app/assets/stylesheets/bkp-old-dec06/jsnotify.css.scss */
+div#notification.success {
+  background-color: #D0F08D;
+}
+/* line 5, ../../../app/assets/stylesheets/bkp-old-dec06/jsnotify.css.scss */
+div#notification.error {
+  background-color: #F2F0C0;
+}
+/* line 8, ../../../app/assets/stylesheets/bkp-old-dec06/jsnotify.css.scss */
+div#notification div.message, div#notification div.close {
+  color: #393E40;
+  float: left;
+  margin-top: 15px;
+  margin-left: 32px;
+}
+/* line 14, ../../../app/assets/stylesheets/bkp-old-dec06/jsnotify.css.scss */
+div#notification div.close {
+  cursor: pointer;
+  font-weight: bold;
+}
+;
+FI"_version;
+F"%08ab4a990a986d98ed7cdedda2ea2dd8

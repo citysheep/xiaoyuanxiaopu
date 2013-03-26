@@ -32,8 +32,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mywebmar_webmarket
+  database: webmarket
   pool: 5
-  username: mywebmar_dba
+  username: root
   password: cuhk2012
   socket: /tmp/mysql.sock

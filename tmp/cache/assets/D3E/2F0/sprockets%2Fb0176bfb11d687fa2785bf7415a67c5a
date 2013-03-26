@@ -1,0 +1,25 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1354634166.971978:@value{	I"length:EFiâI"digest;
+F"%954a460998c31ef11309c0dcbaf5faa0I"source;
+FI"â/* line 6, ../../app/assets/stylesheets/categories.css.scss */
+div#category-list div.box {
+  background-color: white;
+  border-radius: 6px;
+  border-color: #C8C8C8;
+  border-style: solid;
+  border-width: 1px;
+  height: 150px;
+  width: 150px;
+  float: left;
+  margin-left: 25px;
+  margin-top: 25px;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 19, ../../app/assets/stylesheets/categories.css.scss */
+div#category-list div.box div.logo {
+  width: 50px;
+  height: 50px;
+}
+;
+FI"_version;
+F"%13df84c413a75cf55762757ccfacf7ee

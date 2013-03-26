@@ -1,0 +1,3 @@
+o: ActiveSupport::Cache::Entry	:@created_atf1356143432.23492:@value{I"
+class:EFI"StaticAsset;FI"id;F"%a04c68fef4188158a023f6e29192ed9cI"logical_path;FI"noimage.jpg;TI"pathname;FI"($root/app/assets/images/noimage.jpg;FI"content_type;FI"image/jpeg;FI"
+mtime;FI"2012-12-22T09:57:10+08:00;FI"length;FI"	4189;FI"digest;F"%8e77cb804e9a19534b4dcf932950f014I"_version;F"%0868aba5d4b750d3a9421721ea3d9b9c:@expires_in0:@compressedF

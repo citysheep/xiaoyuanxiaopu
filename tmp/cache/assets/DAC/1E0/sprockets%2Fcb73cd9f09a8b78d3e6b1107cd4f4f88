@@ -1,0 +1,23 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1354634166.995415:@value{	I"length:EFiÔI"digest;
+F"%15064a424533e5f2fceab57a6e620e55I"source;
+FI"Ô/* line 1, ../../app/assets/stylesheets/messages.css.scss */
+div.message-box {
+  margin: 20px 0px 0px 30px;
+}
+/* line 2, ../../app/assets/stylesheets/messages.css.scss */
+div.message-box div.header {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+/* line 5, ../../app/assets/stylesheets/messages.css.scss */
+div.message-box div.header span.selected {
+  font-weight: bold;
+}
+
+/* line 11, ../../app/assets/stylesheets/messages.css.scss */
+a.unread {
+  font-weight: bold;
+}
+;
+FI"_version;
+F"%18458a8e5617e249e8679f1aadaa1013

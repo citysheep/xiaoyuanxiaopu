@@ -35,7 +35,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  # invoke :'rvm:use[ruby-1.9.3-p392@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -59,12 +59,12 @@ task :deploy => :environment do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    # invoke :'bundle:install'
+    # invoke :'rails:db_migrate'
+    # invoke :'rails:assets_precompile'
 
     to :launch do
-      queue 'touch tmp/restart.txt'
+    #  queue 'touch tmp/restart.txt'
     end
   end
 end

@@ -1,0 +1,51 @@
+o: ActiveSupport::Cache::Entry	:@created_atf1356143432.115048:@value{	I"length:EFivI"digest;F"%2edb53cab85187c81cc16da33ce0d670I"source;FI"vMyWebMarket.Views.MapView = Backbone.View.extend({  
+    tagName: "div",
+    
+    id: "map-canvas",
+
+    initialize: function(options) {
+      this.model = options.model;
+      this.clickable = options.clickable;
+      this.changable = options.changable;
+      this.eventManager = {};
+			_.extend(this.eventManager, Backbone.Events);
+    },
+    
+    bindEvents: function() {
+    	var delegate = this;
+      google.maps.event.addListener(delegate.getMap(), 'mousedown', function(event) {
+        delegate.getMap().marker.setPosition(event.latLng);
+        if(delegate.changable) delegate.model.set("location", event.latLng);
+        delegate.eventManager.trigger("mapClick", event.latLng);
+      });
+    },
+    
+    render: function() {
+      var map = new google.maps.Map($(this.el)[0], this.model.toJSON()); 
+      this.model.set("map", map);    
+      map.marker = this.newMarker();  
+      if(this.clickable) this.bindEvents();
+      return this;
+    },
+    
+    newMarker: function(){
+      return new google.maps.Marker({
+        position: this.getLocation(), 
+        map: this.getMap(),
+        title:"當前地點"
+      });
+    },
+    
+    getMap: function(){
+      return this.model.get("map");
+    },
+    
+    getLocation: function(){
+      return this.model.get("location");     
+    },
+    
+    getMarkerLocation: function(){
+    		return this.getMap().marker.getPosition();
+    }
+});
+;TI"_version;F"%12821b27362b2e48a83ad9e9a29c9402:@expires_in0:@compressedF
