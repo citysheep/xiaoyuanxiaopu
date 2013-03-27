@@ -1,0 +1,14 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.379099:@value{	I"length:EFi¸I"digest;
+F"%2581cfaa0fe57ab09baff45a21d22f04I"source;
+FI"¸MyWebMarket.Models.Location = Backbone.Model.extend({
+	
+	url: "/location.json",
+	
+	getLocation: function(){
+		return new google.maps.LatLng(this.get("lat"), this.get("lng"));
+	}
+	
+});
+;
+FI"_version;
+F"%3b21addda3f01096cc1400ff21297fad

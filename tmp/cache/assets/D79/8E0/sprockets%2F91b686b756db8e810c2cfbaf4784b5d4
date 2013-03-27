@@ -1,0 +1,6 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.40817:@value{	I"length:EFiÁI"digest;
+F"%217116655d80d45529105325c889f2f6I"source;
+FI"Á!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+;
+FI"_version;
+F"%6a8cee0e49779bb36c144e6cb8bbdd28

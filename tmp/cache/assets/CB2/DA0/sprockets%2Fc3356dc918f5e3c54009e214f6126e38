@@ -1,0 +1,6 @@
+o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.271914:@value{	I"length:EFi9I"digest;
+F"%631abb5b6a854e571ac95f62ebf4bca6I"source;
+FI"9MyWebMarket.Models.Map = Backbone.Model.extend({});
+;
+FI"_version;
+F"%04248ee797d5762d3889b61e242329d9
