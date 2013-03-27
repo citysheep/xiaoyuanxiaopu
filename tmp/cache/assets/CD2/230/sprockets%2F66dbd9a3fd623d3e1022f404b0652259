@@ -1,44 +1,0 @@
-o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.245754:@value{	I"length:EFiI"digest;
-F"%efe90408dbc4946f331026c8317eb003I"source;
-FI"MyWebMarket.Views.FollowView = Backbone.View.extend({ 
-	tagName: "a",
-	
-	className: "btn btn-success",
-
-  events: {
-    "click": "toggleFollow"
-  },
-
-  initialize: function(options) {
-    this.model = options.model;
-    this.eventManager = {};
- 	 	_.extend(this.eventManager, Backbone.Events);
-  },
-
-  render: function() {
-  	if(this.model.id){
-  		this.$el.html("取消關注");
-  	}else{
-  		this.$el.html("關注小鋪");
-  	}
-    return this;
-  },
-
-  toggleFollow: function() {
-  	if(this.model.id){
-  		this.model.destroy();
-  	}else{
-      this.model.save(null, {
-        error: function(model, response){
-          if(response.status == 401) {
-            location.href = "/shops/" + model.get("shop_id") + "?auth=true";
-          }
-        }
-      });
-  	}
-  }
-
-});
-;
-TI"_version;
-F"%a619ce671cf7bd5be1a30e9d43e6af94

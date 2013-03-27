@@ -1,10 +1,0 @@
-o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.08949:@value{	I"length:EFi‰I"digest;
-F"%8e5bb030c282dc8ded6b38d356732d40I"source;
-FI"‰MyWebMarket.Models.Follow = Backbone.Model.extend({
-  url: function() {
-    return this.id ? '/follows/' + this.id : '/follows';
-  }
-});
-;
-FI"_version;
-F"%c5d9186bf1c25256efa319c5b64883eb

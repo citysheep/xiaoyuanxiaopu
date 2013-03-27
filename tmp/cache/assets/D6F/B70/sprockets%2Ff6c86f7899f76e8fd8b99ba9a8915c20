@@ -1,8 +1,0 @@
-o: ActiveSupport::Cache::Entry	:@compressedF:@expires_in0:@created_atf1364396880.1294231:@value{	I"length:EFiKI"digest;
-F"%c8507e6bf40d440e81dd1609d20af458I"source;
-FI"KMyWebMarket.Models.Item = Backbone.Model.extend({
-	url: "/items",
-});
-;
-FI"_version;
-F"%94e94de21ce58ec07b337b84e1fbbdd0
