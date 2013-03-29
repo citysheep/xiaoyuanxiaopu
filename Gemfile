@@ -56,7 +56,7 @@ gem 'simple_form'
 
 gem 'omniauth-renren'
 
-gem 'omniauth-qq-connect'
+gem 'omniauth-qzone'
 
 gem 'omniauth-facebook'
 

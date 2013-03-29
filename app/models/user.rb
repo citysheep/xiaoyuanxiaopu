@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   def self.create_from_auth(hash)
     info = hash[:info]
+    logger.info info
     user_hash = {:name => info[:name], :open_id => info[:uid], :open_avatar => info[:image], :open_link => info[:urls][:Renren]}
     user = (User.find_by_open_id(user_hash[:open_id])) || User.new(user_hash)
     user.skip_confirmation! 
