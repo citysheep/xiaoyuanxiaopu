@@ -1,34 +1,34 @@
 <% content_for :meta do %>
 	<meta property="fb:app_id" content="208690692477625" /> 
-	<meta property="og:title" content=" 校園小鋪 － 打造屬於校園的二手貨平台。。"/>
-	<meta property="og:description" content="完美結合地圖模式，打造屬於校園的二手貨平台。"/>
-	<meta name="title" content=" 校園小鋪 － 打造屬於校園的二手貨平台。。"/>
-	<meta name="description" content="完美結合地圖模式，打造屬於校園的二手貨平台。"/>
-	<meta name="keywords" content=" 校園小鋪,二手,二手貨,二手買賣,二手市場,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港二手市場,台灣二手市場,中文二手市場,拍賣,跳蚤,市場,中文"/>
+	<meta property="og:title" content="校园小铺 － 开小铺 交朋友 轻轻松松做买卖"/>
+	<meta property="og:description" content="完美结合地图模式，打造属于校园的二手货平台。"/>
+	<meta name="title" content="校园小铺 － 开小铺 交朋友 轻轻松松做买卖。"/>
+	<meta name="description" content="完美结合地图模式，打造属于校园的二手货平台。"/>
+	<meta name="keywords" content="校园小铺,二手,二手市场,学校,大学生,跳蚤,赚钱,网店,交易,买卖,二手书,二手电器,二手优惠券,原创,校園小鋪,二手,二手貨,二手買賣,二手市場,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港二手市場,台灣二手市場,中文二手市場,拍賣,跳蚤,市場,中文"/>
 <% end %>
 <div class="row">
 	<div class="span7">
-    	<%= link_to "發佈新貨", new_item_path, :class => "btn btn-warning" %>
+    	<%= link_to "发布新货", new_item_path, :class => "btn btn-warning" %>
 		<% if @address %>
-		當前位置：<%=@address%> <a data-toggle="modal" data-target="#map-modal">更改</a>
+		<a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
 		<% else %>
-		<a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">顯示我附近的二手貨</a>
+		<a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">显示我附近的二手货</a>
 		<% end %>
 		<div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
 		  <div class="modal-header">
 		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h3>請選擇您的當前位置</h3>
+		    <h3>请选择您的当前位置</h3>
 		  </div>
 		  <div class="modal-body">
 		  </div>
 		  <div class="modal-footer">
-		    <a href="#" class="btn btn-primary confirm">確定</a>
+		    <a href="#" class="btn btn-primary confirm">确定</a>
 		    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
 		  </div>
 		</div>
 	</div>
 	<select class="span2 category-select">
-		<option value="">所有類別</option>
+		<option value="">所有类别</option>
 		<% Category.all.each do |category| %>
 		<option value="<%=category.id%>"><%=category.name%></option>
 		<% end %>

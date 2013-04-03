@@ -2,7 +2,7 @@
 <ul class="nav nav-list">
   <li class="nav-header">
     <% if user_signed_in? %>
-    你好，<%= current_user.name %> <span><%= link_to "(登出)", destroy_user_session_path, :method => :delete %></span>
+    您好，<%= current_user.name %> <span><%= link_to "(登出)", destroy_user_session_path, :method => :delete %></span>
     <% else %>
     帳戶
     <% end %>
@@ -13,22 +13,22 @@
     <% end %>
     <% if current_user.unread_message_count > 0 %>
       <p>
-      <%= link_to "您有未讀信息", messages_path, :class => "text-warning" %>   
+      <%= link_to "您有未读信息", messages_path, :class => "text-warning" %>   
       <span class="badge badge-important"><%= current_user.unread_message_count%></span>
       </p>
     <% end %>
     <% unless current_user.open_id %>
-      <li><%= link_to "更新資料",edit_registration_path(:user)%></li>
+      <li><%= link_to "更新资料",edit_registration_path(:user)%></li>
     <% end %>
   <% else %>
-    <li><%= link_to "新用戶註冊", new_registration_path(:user) %></li>
-    <li><%= link_to "用戶登入", new_session_path(:user) %></li>
+    <li><%= link_to "新用户注册", new_registration_path(:user) %></li>
+    <li><%= link_to "用户登入", new_session_path(:user) %></li>
     <% end %>  
-    <li><%= link_to "創建小鋪", new_shop_path %></li>   
-    <li><%= link_to "發佈新貨", new_item_path %></li>   
+    <li><%= link_to "创建小铺", new_shop_path %></li>   
+    <li><%= link_to "发布新货", new_item_path %></li>   
     <% if user_signed_in?%>
-    <li><%= link_to "我的小鋪", shops_path(:user_id => current_user.id ) %></li>   
-  	<li><%= link_to "我的關注", follows_path %></li>   
+    <li><%= link_to "我的小铺", shops_path(:user_id => current_user.id ) %></li>   
+  	<li><%= link_to "我的关注", follows_path %></li>   
   <% end %>
 </ul>
 </div>

@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   def self.create_from_auth(hash)
     info = hash[:info]
     if info[:urls][:figureurl_1]
-      open_link: info[:urls][:figureurl_1]
+      open_link = info[:urls][:figureurl_1]
     else
-      open_link: info[:urls][:Renren]
+      open_link = info[:urls][:Renren]
     end
     user_hash = {:name => info[:name], :open_id => info[:uid], :open_avatar => info[:image], :open_link => open_link}
     user = (User.find_by_open_id(user_hash[:open_id])) || User.new(user_hash)

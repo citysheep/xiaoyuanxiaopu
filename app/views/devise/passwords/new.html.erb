@@ -1,7 +1,7 @@
 <div class="page-header">
-  <h1>忘記密碼<small>重設密碼</small></h1>
+  <h1>忘记密码<small>重设密码</small></h1>
 </div>
 <%= simple_form_for resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post } do |f| %>
-  <%= f.input :email, :label => "電子郵箱" %>
-  <%= f.button :submit, :class => "btn-primary", :value => "發送重設密碼郵件" %>
+  <%= f.input :email, :label => "电子邮箱" %>
+  <%= f.button :submit, :class => "btn-primary", :value => "发送重设密码邮件" %>
 <% end %>

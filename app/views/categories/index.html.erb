@@ -9,11 +9,11 @@
         <%= image_tag "noimage.jpg", :class => "thumbnail" %>
       <% end %>
       <div class="caption">
-        <h3><%= category.name %> <small><%= category.items.count %>件貨</small></h3>
+        <h3><%= category.name %> <small><%= category.items.count %>件货</small></h3>
         <p><a href="categories/<%=category.id%>/items" class="btn btn-success">去看看</a></p>
       	<% if user_signed_in? && current_user.admin == 1%>
-    		<p><%= link_to '編輯', edit_category_path(category), :class => "btn" %> 
-    		<%= link_to '刪除', category, :confirm => '你確認要刪除嗎?', :method => :delete, :class => "btn btn-danger" %>
+    		<p><%= link_to '编辑', edit_category_path(category), :class => "btn" %> 
+    		<%= link_to '删除', category, :confirm => '您确定要删除吗?', :method => :delete, :class => "btn btn-danger" %>
     		</p>
     		<% end %>
       </div>
@@ -24,7 +24,7 @@
 <% if user_signed_in? && current_user.admin == 1%>
 <div class="row">
   <div class="span12">
-  <%= link_to '新分類', new_category_path, :class => "btn btn-primary" %>
+  <%= link_to '新分类', new_category_path, :class => "btn btn-primary" %>
   </div>
 </div>
 <% end %>

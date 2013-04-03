@@ -6,11 +6,11 @@
 	<meta property="fb:app_id" content="208690692477625" /> 
 	<meta property="og:title" content="<%= item.name %>只要$<%= item.price %>"/>
 	<meta property="og:image" content="<%= item.photo.url %>" /> 
-	<meta property="og:description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
+	<meta property="og:description" content="校园小铺 － 开小铺 交朋友 轻轻松松做买卖"/>
 	<meta property="og:url" content="<%= url %>" />
 	<meta name="title" content="<%= item.name %>只要$<%= item.price %>"/>
-	<meta name="description" content="校園小鋪 － 打造屬於校園的二手貨平台"/>
-	<meta name="keywords" content="校園交易,跳蚤市場,二手,二手貨,二手買賣,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港,台灣,拍賣,跳蚤,市場,中文,<%= item.name %>,<%= item.category %>"/>
+	<meta name="description" content="校园小铺 － 开小铺 交朋友 轻轻松松做买卖"/>
+	<meta name="keywords" content="校园交易,二手货,二手书,跳蚤市场,电脑,电器,吃,校園交易,跳蚤市場,二手,二手貨,二手買賣,電腦,手袋,衣物,相機,二手書,香港二手,台灣二手,交易平台,禮券,優惠券,現金券,首飾,手表,網店,賺錢,二手討論區,傢俬,優惠,網店,免費,環保,香港,台灣,拍賣,跳蚤,市場,中文,<%= item.name %>,<%= item.category %>"/>
 <% end %>
 <div class="page-header">
   <h1>
@@ -24,19 +24,19 @@
   </h1>
 	<p>
 		<% if item.shop %>
-		<%= link_to item.shop.name, item.shop %> 發佈於 <%= item.created_at.localtime.to_s(:db) %> 
+		<%= link_to item.shop.name, item.shop %> 发布于 <%= item.created_at.localtime.to_s(:db) %> 
 		<% else %>			
-		<%= link_to item.user.name, item.user %> 發佈於 <%= item.created_at.localtime.to_s(:db) %> 
+		<%= link_to item.user.name, item.user %> 发布于 <%= item.created_at.localtime.to_s(:db) %> 
 		<% end %>
 	<fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like>  		
 	</p>		
 </div>
 <dl class="dl-horizontal">
   <% if item.description && item.description != "" %>
-  <dt>賣家描述</dt>
+  <dt>卖家描述</dt>
   <dd><%= item.description %></dd>
   <% end%>
-  <dt>貨物相片</dt>
+  <dt>货物相片</dt>
 	<dd>	
 		<div class="image">
 	  <% if item.photo.file? %>
@@ -54,12 +54,12 @@
 		<div class="row">
 			<div class="btn-group">
 				<% if user_signed_in? && current_user.id == item.user.id %>
-					<%= link_to '更新商品資料', edit_item_path(item), :class => "btn btn-success" %>
+					<%= link_to '更新商品资料', edit_item_path(item), :class => "btn btn-success" %>
 					<% if !item.buyer %>
-						<%= link_to '標為已售出', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
+						<%= link_to '标为已售完', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
 					<% end %>
 				<% elsif !item.buyer %>
-				<%= link_to '我想買', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
+				<%= link_to '我想买', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
 				<% end %>
 			</div>	
 		</div>
@@ -78,7 +78,7 @@
 			<script type="text/javascript" >
 			var jiathis_config={
 				url:"http://www.mywebmarket.net/items/<%= item.id %>",
-				summary:" 校園小鋪 － 打造屬於校園的二手貨平台。",
+				summary:" 校园小铺 － 开小铺 交朋友 轻轻松松做买卖",
 				title:"<%= item.name %>只要$<%= item.price %>。",
 				pic: "<%= item.photo.url %>",
 				hideMore:false

@@ -5,10 +5,10 @@
     <dd><%= link_to h(@recipient.name), user_path(@recipient) %></dd>
   </dl>
   <%= f.input :to, :as => :hidden %>
-  <%= f.input :subject, :label => "主題", :input_html => { :class => "span4"} %>
+  <%= f.input :subject, :label => "主题", :input_html => { :class => "span4"} %>
   <%= f.input :body, :label => "信息", :input_html => { :class => "span4", :rows => "15"} %>
   <div class="form-actions">
     <%= submit_tag "清空", :type => :reset, :class => "btn btn-danger" %>
-    <%= f.button :submit, :class => "btn-primary", :value => "發送" %>
+    <%= f.button :submit, :class => "btn-primary", :value => "发送" %>
   </div>
 <% end %>

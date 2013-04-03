@@ -4,7 +4,7 @@
     <tr>
       <th>信息</th>
       <th>寄件人</th>
-      <th>收件時間</th>
+      <th>收件时间</th>
       <th></th>
     </tr>
   </thead>
@@ -15,11 +15,11 @@
       <td><%= link_to h(message.subject), message %></td>
       <td><%= link_to h(message.sender.name), user_path(message.sender) %></td>
       <td><%=h message.created_at.to_s(:long) %></td>
-      <td><%= link_to "刪除", message, :confirm => '確定刪除這條信息?', :method => :delete, :class => "btn btn-danger" %></td>
+      <td><%= link_to "删除", message, :confirm => '确定删除这条信息?', :method => :delete, :class => "btn btn-danger" %></td>
     </tr>
     <% end %>
 	<% else %>
-  <tr><td colspan="4">無信息</td></tr>
+  <tr><td colspan="4">无信息</td></tr>
 	<% end %>
   </tbody>
 </table>

@@ -1,9 +1,9 @@
 <div class="page-header">
-  <h1>重新發送確認帳號的步驟說明</h1>
+  <h1>重新发送确认帐号的步骤说明</h1>
 </div>
 
 <%= simple_form_for resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post } do |f| %>
-  <%= f.input :email, :label => "電子郵箱" %>
-  <%= f.button :submit, :class => "btn-success", :value => "重發確認帳號的步驟說明" %>
+  <%= f.input :email, :label => "电子邮箱" %>
+  <%= f.button :submit, :class => "btn-success", :value => "重发确认帐号的步骤说明" %>
 <% end %>
 <%= render :partial => "devise/shared/links" %>

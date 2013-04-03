@@ -1,5 +1,5 @@
-<p>您好，<%= @resource.name %>， 歡迎加入 校園小鋪！</p>
+<p>您好<%= @resource.name %>，欢迎加入校园小铺！</p>
 
-<p>請點擊以下鏈接確認您的帳號:</p>
+<p>请点击以下链接确认您的帐号：</p>
 
-<p><%= link_to '確認帳號', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to '确认帐号', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

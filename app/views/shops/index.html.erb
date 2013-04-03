@@ -1,20 +1,20 @@
 <div class="row">
   <div class="span7">
-    <%= link_to "創建小鋪", new_shop_path, :class => "btn btn-warning" %>
+    <%= link_to "创建小铺", new_shop_path, :class => "btn btn-warning" %>
     <% if @address %>
-    當前位置：<%=@address%> <a data-toggle="modal" data-target="#map-modal">更改</a>
+    <a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
     <% else %>
-    <a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">顯示我附近的小鋪</a>
+    <a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">显示我附近的小铺</a>
     <% end %>
     <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>請選擇您的當前位置</h3>
+        <h3>请选择您当前的位置</h3>
       </div>
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-primary confirm">確定</a>
+        <a href="#" class="btn btn-primary confirm">确定</a>
         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
       </div>
     </div>
@@ -22,7 +22,7 @@
 </div>
 <% if @shops.length == 0 %>
   <% if @follow %>
-  <h4>你还没有关注任何小铺</h4>
+  <h4>您没有关注任何小铺。</h4>
   <% else %>
   <h4>暂无小铺，快来创建一个吧！</h4>
   <% end %>
@@ -35,18 +35,18 @@
 <div class="span4">
     <hr >
     <div class="shop">
-      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件貨</small> <fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like></h3>
-      <p>掌櫃: <%= link_to shop.user.name, shop.user %> 創立於: <%= shop.created_at.to_date.to_s %></p>
+      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small> <fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like></h3>
+      <p>掌柜: <%= link_to shop.user.name, shop.user %> 创立于: <%= shop.created_at.to_date.to_s %></p>
       <p><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [shop.lat, shop.lng]).full_address %></p>
         <p><span class="label label-success">最新消息</span></p>
         <% shop.items.last(2).reverse.each do |item|%>
-          <p><%= item.created_at.localtime.to_s(:db) %> 發佈新貨 <%= link_to item.name, item %></p>
+          <p><%= item.created_at.localtime.to_s(:db) %> 发布新货 <%= link_to item.name, item %></p>
         <% end %>
         <% if shop.items.count < 2 %>
-          <p><%= shop.created_at.localtime.to_s(:db) %> 正式開業！</p>
+          <p><%= shop.created_at.localtime.to_s(:db) %> 正式开业！</p>
         <% end %>
         <% if shop.items.count < 1 %>
-          <p><%= (shop.created_at.localtime - 60).to_s(:db) %> 小鋪準備開業</p>
+          <p><%= (shop.created_at.localtime - 60).to_s(:db) %> 小铺准备开业。</p>
         <% end %>
         <p class="pull-right">
           <%= link_to "更多#{shop.name}的消息", shop, :class => "btn btn-mini "%>
@@ -57,7 +57,7 @@
 </div>
 <div class="row">
   <div class="span8">
-  <%= will_paginate @shops, :previous_label => "上一頁", :next_label => "下一頁" %>
+  <%= will_paginate @shops, :previous_label => "上一页", :next_label => "下一页" %>
 </div>
 </div>
 <script type = "text/javascript">
