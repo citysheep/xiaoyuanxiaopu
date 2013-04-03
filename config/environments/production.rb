@@ -65,7 +65,7 @@ MyWebMarket::Application.configure do
     :port => 25,
     :domain => "mywebmarket.net",
     :authentication => :login,
-    :user_name => "mywebmar+mywebmarket.net",
+    :user_name => "root+mywebmarket.net",
     :password => "cuhk2012",
   }
   
