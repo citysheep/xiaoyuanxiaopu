@@ -10,13 +10,13 @@
 			<thead>
 				<tr>
 					<th>名称</th>
-					<th>位置</th>
+					<th>描述</th>
 				</tr>
 			</thead>
 			<% @user.items.each do |item| %>
 				<tr onClick="goToItem(<%=item.id%>)">
 					<td><%= item.name %></td>
-					<td><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [item.lat, item.lng]).full_address %></td>
+					<td><%= item.description %></td>
 				</tr>
 			<% end %>
 		 </tbody>

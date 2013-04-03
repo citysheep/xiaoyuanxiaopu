@@ -6,3 +6,9 @@ ENV['RAILS_ENV'] ||= 'development'
 require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 MyWebMarket::Application.initialize!
+
+ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.sendmail_settings = {
+  :location => "ssmtp",
+  :arguments => "-i"
+}
