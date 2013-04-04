@@ -95,7 +95,11 @@
 	</div>
 </div>
 <div class="row center">
-	<div class="fb-comments" data-href="<%= url %>" data-num-posts="3" data-width="600"></div>
+	<!-- <div class="fb-comments" data-href="<%= url %>" data-num-posts="3" data-width="600"></div> -->
+	<!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=0" async=""></script>
+	<!-- UY END -->
 </div>
 <script type = "text/javascript">
 	var itemLocation = new google.maps.LatLng(<%= item.lat %>, <%= item.lng %>);

@@ -58,17 +58,12 @@ MyWebMarket::Application.configure do
   config.active_support.deprecation = :notify
   
   config.action_mailer.default_url_options = { :host => "mywebmarket.net" }
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.smtp_settings = {
-    :address => "mail.mywebmarket.net",
-    :port => 25,
-    :domain => "mywebmarket.net",
-    :authentication => :login,
-    :user_name => "root+mywebmarket.net",
-    :password => "cuhk2012",
-  }
   
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'please-do-not-reply@mywebmarket.net'}
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
 end

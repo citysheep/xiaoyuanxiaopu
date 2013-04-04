@@ -1,6 +1,5 @@
 # encoding: UTF-8
 class SiteMailer < ActionMailer::Base
-  default :from => "mywebmarket@mywebmarket.com"
 
   def notification_email(message)
     @message  = message
