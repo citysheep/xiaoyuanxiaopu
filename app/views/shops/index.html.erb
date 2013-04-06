@@ -17,11 +17,16 @@
   </div>
 </div>
 <% if @shops.length == 0 %>
-  <% if @follow %>
-  <h4>您没有关注任何小铺。</h4>
-  <% else %>
-  <h4>暂无小铺，快来创建一个吧！</h4>
-  <% end %>
+  <div class="alert alert-no-item">
+    <% if @follow %>
+    <h4>您还没有关注过任何小铺呢</h4>
+    <p></p>
+    <p>您可以<%= link_to "点击这里", shops_path %>浏览您附近的校园小铺哦。</p>
+    <% else %>
+    <h4>暂时没有可浏览的小铺呢</h4>
+    <p>您可以<%= link_to "点击这里", new_shop_path %>, 创建一个属于自己的校园小铺哦。</p>
+    <% end %>
+  </div>
 <% end %>
 <div class="row">
 <% @shops.each do |shop| %>

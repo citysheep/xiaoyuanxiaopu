@@ -3,7 +3,6 @@ require 'will_paginate/array'
 
 class ItemsController < ApplicationController
   layout "application"
-  geocode_ip_address
   before_filter :get_item, :only => [:show, :edit, :update, :destroy, :soldout]
   before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :soldout]
   
@@ -34,12 +33,12 @@ class ItemsController < ApplicationController
       @items = @items.where(:category_id=>@cid)
     end
 
-    @items = @items.paginate(:page => params[:page])
-
     if !@lat || !@lng
-      @lat = 22.299842230893535
-      @lng = 114.17249643179662
+      @lat = geo_lat
+      @lng = geo_lng
     end
+
+    @items = @items.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,9 +46,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def geo_address(lat, lng)
-    (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [lat, lng]).full_address
-  end
 
   # GET /items/1
   # GET /items/1.json
@@ -64,8 +60,8 @@ class ItemsController < ApplicationController
   # GET /items/new.json
   def new
     @item = Item.new
-    @item.lat = session[:location] ? session[:location][:lat] : session[:geo_location] ? session[:geo_location].lat : 22.325116
-    @item.lng = session[:location] ? session[:location][:lng] : session[:geo_location] ? session[:geo_location].lng : 114.175415  
+    @item.lat = session[:location] ? session[:location][:lat] : geo_lat
+    @item.lng = session[:location] ? session[:location][:lng] : geo_lng
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @item }
@@ -92,7 +88,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, :notice => '货物成功发布啦！' }
+        format.html { redirect_to @item, :notice => "<h4>货物成功发布啦！</h4><p></p><a class='social-share btn btn-info'>和好友分享</a>".html_safe }
         format.json { render :json => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }

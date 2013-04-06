@@ -2,6 +2,7 @@
 require 'will_paginate/array' 
 
 class ShopsController < ApplicationController
+  geocode_ip_address
   before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /shops
@@ -22,22 +23,18 @@ class ShopsController < ApplicationController
       @shops = Shop.scoped.order("created_at DESC")
     end
 
-    if params[:action] == "showMyShops"
-      @uid = current_user.id
+    if params[:user_id]
+      @shops = @shops.where(:user_id=>params[:user_id])
     else
-      @uid = params[:user_id]
+      @shops = @shops.select{|s| s.items.count > 0}
     end
 
-    if @uid
-      @shops = @shops.where(:user_id=>@uid)
+    if !@lat || !@lng
+      @lat = geo_lat
+      @lng = geo_lng
     end
 
     @shops = @shops.paginate(:page => params[:page])
-
-    if !@lat || !@lng
-      @lat = 22.299842230893535
-      @lng = 114.17249643179662
-    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -73,8 +70,8 @@ class ShopsController < ApplicationController
   # GET /shops/new.json
   def new
     @shop = Shop.new
-    @shop.lat = session[:location] ? session[:location][:lat] : session[:geo_location] ? session[:geo_location].lat : 22.325116
-    @shop.lng = session[:location] ? session[:location][:lng] : session[:geo_location] ? session[:geo_location].lng : 114.175415 
+    @shop.lat = session[:location] ? session[:location][:lat] : geo_lat
+    @shop.lng = session[:location] ? session[:location][:lng] : geo_lng
 
     respond_to do |format|
       format.html # new.html.erb
@@ -97,7 +94,7 @@ class ShopsController < ApplicationController
     @popup = true
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to @shop, :notice => '你的小铺开张啦！恭喜！' }
+        format.html { redirect_to @shop, :notice => "<h4>恭喜！您的小铺成功开张啦！</h4><p>但是<strong>只有发布过货物的小铺才可以显示在首页</strong>哦。您可以#{view_context.link_to('点击这里', new_item_path)}发布新货。<p><a class='social-share btn btn-info'>和好友分享</a></p>".html_safe }
         format.json { render :json => @shop, :status => :created, :location => @shop }
       else
         format.html { render :action => "new" }

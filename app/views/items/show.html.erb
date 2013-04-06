@@ -95,19 +95,16 @@
 	</div>
 </div>
 <div class="row center">
-	<!-- UJian Button BEGIN -->
-	<div class="ujian-hook"></div>
-	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
-	<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
-	<!-- UJian Button END -->
-</div>
-<div class="row center">
 	<!-- <div class="fb-comments" data-href="<%= url %>" data-num-posts="3" data-width="600"></div> -->
 	<!-- UY BEGIN -->
 	<div id="uyan_frame"></div>
 	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=0" async=""></script>
 	<!-- UY END -->
 </div>
+<!-- UJian Button BEGIN -->
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&fade=1"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
 <script type = "text/javascript">
 	var itemLocation = new google.maps.LatLng(<%= item.lat %>, <%= item.lng %>);
 	var itemMap = new MyWebMarket.Models.Map({
@@ -122,5 +119,9 @@
 		clickable: false
 	});
 	$("div#map").html($(itemMapView.render().el));
+
+	$("a.social-share").click(function(){
+		$("a.jiathis_button_renren").click();
+	});
 </script>
 

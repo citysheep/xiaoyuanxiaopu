@@ -1,4 +1,12 @@
-<% if @items.length == 0 %><h4>暂无货物，快来<%= link_to "发布一个", new_item_path %>吧！</h4><% end %>
+<% if @items.length == 0 %>
+  <div class="alert alert-no-item">
+    <h4>暂时没有货物呢</h4>
+    <% if @shop && user_signed_in? && @shop.user.id == current_user.id %>
+    <p></p>
+    <p>您可以<%= link_to "点击这里", new_item_path %>发布新货哦。</p>
+  	<% end %>
+  </div>
+<% end %>
 <% @items.each do |item| %>
 <% 
 	url = "http://www.mywebmarket.net/items/#{item.id}" 

@@ -11,7 +11,7 @@ zh-TW:
 
   devise:
     failure:
-      already_authenticated: '你已經登入。'
+      already_authenticated: '您已經登入。'
       unauthenticated: '您需要先註冊，登入後才能繼續。'
       unconfirmed: '您的帳號需需要經過確認後，才能繼續。'
       locked: '您的帳號已被鎖定。'

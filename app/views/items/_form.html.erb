@@ -3,7 +3,7 @@
   <%= f.input :name, :input_html => { :class => "span4"}, :label => "货物名称" %>
   <%= f.input :price, :input_html => { :class => "span4"}, :label => "价格" %>
   <% if current_user.shops %>
-  <%= f.input :shop_id, :label => "小铺", :collection => current_user.shops, :prompt => "选择一间你的小铺" %>
+  <%= f.input :shop_id, :label => "小铺", :collection => current_user.shops, :prompt => "请选择一间您的小铺" %>
   <% end %>
   <%= f.input :category_id, :label => "种类", :collection => Category.all, :prompt => "请选择货物种类" %>
   <%= f.input :photo, :input_html => { :class => "span4"}, :label => "图片" %>

@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_private_messages
 
+  validates_uniqueness_of :email
+
   def self.create_from_auth(hash)
     info = hash[:info]
     if info[:urls][:figureurl_1]
