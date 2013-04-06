@@ -24,7 +24,6 @@ class ItemsController < ApplicationController
     if session[:location]
       @lat = session[:location][:lat]
       @lng = session[:location][:lng]
-      @address = geo_address(@lat, @lng)
       @items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
     else
       @items = Item.scoped.order("buyer", "created_at desc")

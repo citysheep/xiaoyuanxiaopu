@@ -9,11 +9,7 @@
 <div class="row">
 	<div class="span7">
     	<%= link_to "发布新货", new_item_path, :class => "btn btn-warning" %>
-		<% if @address %>
-		<a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
-		<% else %>
-		<a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">显示我附近的二手货</a>
-		<% end %>
+		<a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">选择当前位置</a>
 		<div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
 		  <div class="modal-header">
 		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

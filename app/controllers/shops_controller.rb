@@ -17,7 +17,6 @@ class ShopsController < ApplicationController
     if session[:location]
       @lat = session[:location][:lat]
       @lng = session[:location][:lng]
-      @address = geo_address(@lat, @lng)
       @shops = Shop.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "created_at DESC")
     else
       @shops = Shop.scoped.order("created_at DESC")
