@@ -36,7 +36,7 @@
 <div class="span4">
     <hr >
     <div class="shop">
-      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small> <fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like></h3>
+      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small></h3>
       <p>掌柜: <%= link_to shop.user.name, shop.user %> 创立于: <%= shop.created_at.to_date.to_s %></p>
       <p><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [shop.lat, shop.lng]).full_address %></p>
         <p><span class="label label-success">最新消息</span></p>

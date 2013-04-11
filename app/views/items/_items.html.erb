@@ -33,7 +33,6 @@
 			  <% if item.buyer %>
 			  	<span class="label label-warning">已售出</span>
 			  <% end %>
-				<fb:like href="<%= url %>" send="false" layout="button_count" width="50" show_faces="false"></fb:like>
 		  	</h3>
 			</div>	
 			<div class="row">
@@ -49,19 +48,19 @@
 			<div class="row"><p>描述: <%= item.description %></p></div>
 			<% end %>
 			<div class="row">
-				<%= link_to '貨物詳情', item, :class => "btn btn-info" %>
+				<%= link_to '货物详情', item, :class => "btn btn-info" %>
 				<% if user_signed_in? && current_user.id == item.user.id %>
-					<%= link_to '更新資料', edit_item_path(item), :class => "btn btn-success" %>
+					<%= link_to '更新资料', edit_item_path(item), :class => "btn btn-success" %>
 					<% if !item.buyer %>
-						<%= link_to '標為已售出', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
+						<%= link_to '标为已售出', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
 					<% end %>
 				<% elsif !item.buyer %>
-					<%= link_to '我想買', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
+					<%= link_to '我想买', new_message_path(:item_id => item.id), :class => "btn btn-success" %> 
 				<% end %>
 			</div>				
 		</div>
 	</div>	
 </div>
 <% end %>
-<%= will_paginate @items, :previous_label => "上一頁", :next_label => "下一頁" %>
+<%= will_paginate @items, :previous_label => "上一页", :next_label => "下一页" %>
  
