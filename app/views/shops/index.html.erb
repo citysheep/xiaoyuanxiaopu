@@ -52,6 +52,29 @@
         <p class="pull-right">
           <%= link_to "更多#{shop.name}的消息", shop, :class => "btn btn-mini "%>
         </p>
+        <!-- JiaThis Button BEGIN -->
+        <div class="jiathis_style">
+        <a class="jiathis_button_qzone"></a>
+        <a class="jiathis_button_renren"></a>
+        <a class="jiathis_button_weixin"></a>
+        <a class="jiathis_button_tqq hidden-phone"></a>
+        <a class="jiathis_button_tsina hidden-phone"></a>
+        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+        <a class="jiathis_counter_style"></a>
+        </div>
+        <script type="text/javascript" >
+        var jiathis_config={
+          url:"<%= url %>",
+          summary:"校园小铺 － 开小铺 交朋友 轻轻松松做买卖",
+          title:"向你推荐一个校园小铺: <%= shop.name %>",
+          <% unless shop.items.last.nil? %>
+            pic: "http://www.mywebmarket.net/<%= shop.items.last.photo.url %>",
+          <% end %>
+          hideMore:false
+        }
+        </script>
+        <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
     </div>
 </div>
 <% end %>
@@ -64,7 +87,7 @@
 <script type = "text/javascript">
   center = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
   var map = new MyWebMarket.Models.Map({
-    zoom: 12,
+    zoom: 10,
     center: center,
     location: center,
     mapTypeId: google.maps.MapTypeId.ROADMAP

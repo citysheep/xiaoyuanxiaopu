@@ -54,9 +54,9 @@
 	var jiathis_config={
 		url:"<%= url %>",
 		summary:"校园小铺 － 开小铺 交朋友 轻轻松松做买卖",
-		title:"介绍一个校园小铺:<%= shop.name %>",
+		title:"向你推荐一个校园小铺: <%= shop.name %>",
     <% unless shop.items.last.nil? %>
-      pic: "<%= shop.items.last.photo.url %>",
+      pic: "http://www.mywebmarket.net/<%= shop.items.last.photo.url %>",
 		<% end %>
     hideMore:false
 	}
@@ -77,7 +77,7 @@
 <script type = "text/javascript">
   var shopLocation = new google.maps.LatLng(<%= shop.lat %>, <%= shop.lng %>);
   var shopMap = new MyWebMarket.Models.Map({
-    zoom: 14,
+    zoom: 10,
     center: shopLocation,
     location: shopLocation,
     mapTypeId: google.maps.MapTypeId.ROADMAP

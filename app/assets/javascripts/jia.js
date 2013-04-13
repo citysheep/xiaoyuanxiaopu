@@ -1,5 +1,5 @@
 var jiathis_config={
-	summary:" 校園小鋪 － 打造屬於大學的二手交易平台。",
+	summary:"校园小铺 开小铺 交朋友",
 	// pic: "<%= item.photo.url %>",
 	hideMore:false
 }

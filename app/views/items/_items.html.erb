@@ -34,7 +34,7 @@
 			  	<span class="label label-warning">已售出</span>
 			  <% end %>
 		  	</h3>
-			</div>	
+			</div>
 			<div class="row">
 				<p><%= item.created_at.localtime.to_s(:db) %>
 				<% if item.shop %>
@@ -43,7 +43,27 @@
 				<%= link_to item.user.name, item.user %>
 				<% end %>
 				發佈</p>
-			</div>			
+			</div>
+			<!-- JiaThis Button BEGIN -->
+	        <div class="jiathis_style row">
+	        <a class="jiathis_button_qzone"></a>
+	        <a class="jiathis_button_renren"></a>
+	        <a class="jiathis_button_weixin"></a>
+	        <a class="jiathis_button_tqq hidden-phone"></a>
+	        <a class="jiathis_button_tsina hidden-phone"></a>
+	        </div>
+	        <script type="text/javascript" >
+	        var jiathis_config={
+	          	url:"<%= url %>",
+				summary:" 校园小铺 － 开小铺 交朋友 轻轻松松做买卖",
+				title:"<%= item.name %>只要$<%= item.price %>。",
+				pic: "http://www.mywebmarket.net/<%= item.photo.url %>",
+				hideMore:true
+	        }
+	        </script>
+	        <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+	        <!-- JiaThis Button END -->		
+	        <p></p>					
 			<% if item.description && item.description != "" %>
 			<div class="row"><p>描述: <%= item.description %></p></div>
 			<% end %>

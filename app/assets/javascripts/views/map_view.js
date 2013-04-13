@@ -32,7 +32,7 @@ MyWebMarket.Views.MapView = Backbone.View.extend({
       return new google.maps.Marker({
         position: this.getLocation(), 
         map: this.getMap(),
-        title:"當前地點"
+        title:"当前地点"
       });
     },
     

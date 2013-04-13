@@ -15,9 +15,9 @@ MyWebMarket.Views.FollowView = Backbone.View.extend({
 
   render: function() {
   	if(this.model.id){
-  		this.$el.html("取消關注");
+  		this.$el.html("取消关注");
   	}else{
-  		this.$el.html("關注小鋪");
+  		this.$el.html("关注小铺");
   	}
     return this;
   },
