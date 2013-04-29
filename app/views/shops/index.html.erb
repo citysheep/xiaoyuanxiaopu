@@ -31,6 +31,15 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="span1"></div>
+  <div class= "toolbar span7">
+    <span>您附近的小铺</span>
+    <%= link_to "创建小铺", new_shop_path %> |
+    <%= link_to "发布新货", new_item_path %> |
+    <a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
+  </div>
+</div>
 <% if @shops.length == 0 %>
   <div class="alert alert-no-item">
     <% if @follow %>
@@ -43,15 +52,6 @@
     <% end %>
   </div>
 <% end %>
-<div class="row">
-  <div class="span1"></div>
-  <div class= "toolbar span7">
-    <span>您附近的小铺</span>
-    <%= link_to "创建小铺", new_shop_path %> |
-    <%= link_to "发布新货", new_item_path %> |
-    <a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
-  </div>
-</div>
 <% @shops.each do |shop| %>
 <% 
   url = "http://www.mywebmarket.net/shops/#{shop.id}" 

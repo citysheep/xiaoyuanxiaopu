@@ -23,7 +23,8 @@ class ShopsController < ApplicationController
       @lng = geo_lng
     end
 
-    @shops = Shop.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "created_at DESC")
+    # @shops = Shop.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "created_at DESC")
+    @shops = Shop.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "created_at DESC")
 
     if params[:user_id]
       @shops = @shops.where(:user_id=>params[:user_id])

@@ -28,7 +28,8 @@ class ItemsController < ApplicationController
       @lng = geo_lng
     end
 
-    items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
+    items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
+    # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
 
     @cid = params[:category_id]
     if @cid
@@ -51,11 +52,12 @@ class ItemsController < ApplicationController
       @lat = geo_lat
       @lng = geo_lng
     end
-    
+
     if params[:search]
       @items = Item.search params[:search]
     else
-      @items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
+      # @items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
+      @items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
     end
 
     @items = @items.paginate(:page => params[:page])
