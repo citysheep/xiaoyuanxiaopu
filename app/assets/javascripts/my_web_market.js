@@ -9,4 +9,5 @@ window.MyWebMarket = {
 
 $(document).ready(function(){
   MyWebMarket.init();
+  $("a.hint").tooltip();
 });

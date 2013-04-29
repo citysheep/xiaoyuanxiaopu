@@ -23,29 +23,25 @@ class ItemsController < ApplicationController
     if session[:location]
       @lat = session[:location][:lat]
       @lng = session[:location][:lng]
-      @items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
     else
-      @items = Item.scoped.order("buyer", "created_at desc")
-    end
-
-    @cid = params[:category_id]
-    if @cid
-      @items = @items.where(:category_id=>@cid)
-    end
-
-    if !@lat || !@lng
       @lat = geo_lat
       @lng = geo_lng
     end
 
-    @items = @items.paginate(:page => params[:page])
+    items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10).order("distance asc", "buyer", "created_at desc")
+
+    @cid = params[:category_id]
+    if @cid
+      items = items.where(:category_id=>@cid)
+    end
+
+    @items = items.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @items }
+      format.json { render :json => items }
     end
   end
-
 
   # GET /items/1
   # GET /items/1.json

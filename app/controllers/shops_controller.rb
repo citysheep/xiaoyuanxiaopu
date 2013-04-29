@@ -18,20 +18,17 @@ class ShopsController < ApplicationController
     if session[:location]
       @lat = session[:location][:lat]
       @lng = session[:location][:lng]
-      @shops = Shop.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "created_at DESC")
     else
-      @shops = Shop.scoped.order("created_at DESC")
+      @lat = geo_lat
+      @lng = geo_lng
     end
+
+    @shops = Shop.geo_scope(:origin=>[@lat, @lng], :within=>10).order("distance asc", "created_at DESC")
 
     if params[:user_id]
       @shops = @shops.where(:user_id=>params[:user_id])
     else
       @shops = @shops.select{|s| s.items.count > 0}
-    end
-
-    if !@lat || !@lng
-      @lat = geo_lat
-      @lng = geo_lng
     end
 
     @shops = @shops.paginate(:page => params[:page])

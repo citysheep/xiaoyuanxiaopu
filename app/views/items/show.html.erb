@@ -73,12 +73,15 @@
 				<a href="http://www.jiathis.com/share" class="hidden-phone jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 				<a class="jiathis_counter_style"></a>
 			</div>
+	        <% 
+	          pic_url = item.photo.file? ? "http://www.mywebmarket.net/#{item.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
+	        %>				
 			<script type="text/javascript" >
 			var jiathis_config={
 				url:"http://www.mywebmarket.net/items/<%= item.id %>",
 				summary:" 校园小铺 － 开小铺 交朋友 轻轻松松做买卖",
 				title:"<%= item.name %>只要$<%= item.price %>。",
-				pic: "http://www.mywebmarket.net/<%= item.photo.url %>",
+				pic: "<%= pic_url %>",
 				hideMore:false
 			}
 			</script>

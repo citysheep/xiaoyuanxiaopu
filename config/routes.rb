@@ -26,7 +26,7 @@ MyWebMarket::Application.routes.draw do
     resources :items
   end  
 
-  root :to => 'categories#index'
+  root :to => 'shops#index'
 
   match 'location' => 'locations#get'
 

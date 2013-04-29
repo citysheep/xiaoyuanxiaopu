@@ -1,14 +1,50 @@
-<ul class="nav">
-  <li><a href="/">首页</a></li>
-  <li><%= link_to "所有货物", items_path(:page=>1) %></li>
-  <li><%= link_to "热门小铺", shops_path %></li>
-  <!-- <li><%= link_to "创建小铺", new_shop_path %></li> -->
-  <li><%= link_to "我的关注", follows_path %></li>
-  <!-- <li><%= link_to "我的帐户", user_path(:id => "profile") %></li> -->
-  <li><%= link_to "我的信箱", messages_path %></li>
-  <li><a href="#" data-toggle="modal" data-target="#aboutus-modal">关于我们</a></li> 
-</ul>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+ 	  <a class="brand" href="#"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %>校园小铺</a>      
+    <div class="nav-collapse collapse">
+	    <% if user_signed_in? %>		
+			<ul class="nav pull-right">
+				<li><a class="name" href="<%= user_path(current_user) %>"><i class="icon-user icon-white"></i> <%= current_user.name %></a></li>
+			  <li><a class="hint" href="<%= shops_path(:user_id => current_user.id) %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的小铺"><i class="icon-home icon-white"></i></a></li>
+			  <li><a class="hint" href="<%= follows_path %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的关注"><i class="icon-heart icon-white"></i></a></li>
+			  <li><a class="hint" href="<%= messages_path(:user) %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的信箱"><i class="icon-envelope icon-white"></i></a></li>
+			  <li><a class="hint" href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="登出"><i class="icon-off icon-white"></i></a></li>
+			</ul>			
+			<% else %>
+					<ul class="nav pull-right">
+			    <li><%= link_to "注册", new_registration_path(:user) %></li>
+  	  		<li><%= link_to "登入", new_session_path(:user) %></li>
+  	  		</ul>
+			<% end %>
+			<ul class="nav">
+			  <!-- <li><a href="/">首页</a></li> -->
+			  <li><%= link_to "附近小铺", shops_path %></li>
 
-<!-- <form class="navbar-search">
-  <input type="text" class="search-query" placeholder="Search">
-</form> -->
+			  <li><%= link_to "所有货物", items_path(:page=>1) %></li>
+			  <!-- <li><%= link_to "创建小铺", new_shop_path %></li> -->
+			  <% if user_signed_in? %><li><%= link_to "我的关注", follows_path %></li><% end %>
+			  <!-- <li><%= link_to "我的帐户", user_path(:id => "profile") %></li> -->
+			  <!-- <li><%= link_to "我的信箱", messages_path %></li> -->
+			  <form class="navbar-search">
+			  	<input type="text" data-provide="typeahead" class="span2 search-query" placeholder="想要找什么？" />
+			  </form>
+			</ul>      	
+	  </div><!--/.nav-collapse -->      
+    </div>    
+  </div>
+</div>
+<script type="text/javascript">
+$('.search-query').typeahead({
+    source: function (typeahead) {
+        return $.get('/items.json', function (data) {
+            return typeahead.process(data);
+        });
+    }
+});
+</script>

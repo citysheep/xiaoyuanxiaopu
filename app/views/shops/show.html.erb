@@ -39,7 +39,10 @@
     <a data-toggle="modal" data-target="#shop-map-modal">点击查看</a>
   </dd>
 </dl>
-<div class="row" id="share-bar" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', 'http://www.mywebmarket.net/<%= shop.items.last.photo.url %>');">
+<% 
+  pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.mywebmarket.net/#{shop.items.last.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
+%>
+<div class="row" id="share-bar" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', '<%= pic_url %>');">
 	<!-- JiaThis Button BEGIN -->
 	<div id="jiathis_style_32x32">
 		<a class="jiathis_button_qzone"></a>

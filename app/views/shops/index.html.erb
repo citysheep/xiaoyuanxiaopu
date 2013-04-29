@@ -1,7 +1,22 @@
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="active item">
+    <%= render "layouts/header1" %>
+    </div>
+    <div class="item">
+    <%= render "layouts/header2" %>
+    </div>
+  </div>
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
 <div class="row">
   <div class="span7">
-    <%= link_to "创建小铺", new_shop_path, :class => "btn btn-warning" %>
-    <a class="btn btn-warning" data-toggle="modal" data-target="#map-modal">选择当前位置</a>
     <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -29,31 +44,49 @@
   </div>
 <% end %>
 <div class="row">
+  <div class="span1"></div>
+  <div class= "toolbar span7">
+    <span>您附近的小铺</span>
+    <%= link_to "创建小铺", new_shop_path %> |
+    <%= link_to "发布新货", new_item_path %> |
+    <a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
+  </div>
+</div>
 <% @shops.each do |shop| %>
 <% 
   url = "http://www.mywebmarket.net/shops/#{shop.id}" 
+  item = shop.items.last
 %>
-<div class="span4">
-    <hr >
-    <div class="shop">
+<div class="span4 shop">
       <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small></h3>
       <p>掌柜: <%= link_to shop.user.name, shop.user %> 创立于: <%= shop.created_at.to_date.to_s %></p>
-      <p><%= (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [shop.lat, shop.lng]).full_address %></p>
-        <p><span class="label label-success">最新消息</span></p>
-        <% shop.items.last(2).reverse.each do |item|%>
-          <p><%= item.created_at.localtime.to_s(:db) %> 发布新货 <%= link_to item.name, item %></p>
+      <% if item %><p><span class="label label-success">最新消息</span> 发布新货 <%= link_to item.name, item %></p><% end %>
+        <% if item.photo.file? %>
+            <div class="span3"><a href="<%= item_path(item) %>" class="img-container"><img src="<%= item.photo.url %>"></a></div>
         <% end %>
-        <% if shop.items.count < 2 %>
-          <p><%= shop.created_at.localtime.to_s(:db) %> 正式开业！</p>
+<!--       <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+        <% shop.items.each do |i| %>
+          <% if i.photo.file? %>
+              <div class="item"><a href="#" class="img-container"><img src="<%= i.photo.url %>"></a></div>
+          <% end %>
+          <% end %>
+        </div>   
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div> -->
+
+<!--       <% shop.items.each do |i| %>
+        <% if i.photo.file? %>
+            <div class="span2"><a href="#" class="img-container"><img src="<%= i.photo.url %>"></a></div>
         <% end %>
-        <% if shop.items.count < 1 %>
-          <p><%= (shop.created_at.localtime - 60).to_s(:db) %> 小铺准备开业。</p>
-        <% end %>
-        <p class="pull-right">
-          <%= link_to "更多#{shop.name}的消息", shop, :class => "btn btn-mini "%>
-        </p>
+      <% end %> -->
+      <% 
+        pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.mywebmarket.net/#{shop.items.last.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
+      %>
+      <div class="row">
         <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', 'http://www.mywebmarket.net/<%= shop.items.last.photo.url %>');" >
+        <div class="jiathis_style pull-right" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', '<%= pic_url %>');" >
         <a class="jiathis_button_qzone"></a>
         <a class="jiathis_button_renren"></a>
         <a class="jiathis_button_weixin"></a>
@@ -62,10 +95,9 @@
         <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
         </div>
         <!-- JiaThis Button END -->
-    </div>
+      </div>
 </div>
 <% end %>
-</div>
 <div class="row">
   <div class="span8">
   <%= will_paginate @shops, :previous_label => "上一页", :next_label => "下一页" %>
@@ -93,7 +125,7 @@
     }
   });
 
-  <% if !@address && !@cid %>
+  <% if !session[:location] %>
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function( position ){
