@@ -28,9 +28,8 @@ class ItemsController < ApplicationController
       @lng = geo_lng
     end
 
-    # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10).order("distance asc", "buyer", "created_at desc")
+    items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
 
-    items = Item.all
     @cid = params[:category_id]
     if @cid
       items = items.where(:category_id=>@cid)
@@ -45,12 +44,18 @@ class ItemsController < ApplicationController
   end
 
   def search
-
+    if session[:location]
+      @lat = session[:location][:lat]
+      @lng = session[:location][:lng]
+    else
+      @lat = geo_lat
+      @lng = geo_lng
+    end
+    
     if params[:search]
       @items = Item.search params[:search]
     else
-      @items = Item.all
-      # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10).order("distance asc", "buyer", "created_at desc")
+      @items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
     end
 
     @items = @items.paginate(:page => params[:page])
