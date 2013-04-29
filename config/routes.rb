@@ -29,6 +29,7 @@ MyWebMarket::Application.routes.draw do
   root :to => 'shops#index'
 
   match 'location' => 'locations#get'
+  match 'search' => 'items#search'
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'

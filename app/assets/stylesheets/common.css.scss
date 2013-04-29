@@ -73,6 +73,9 @@ div.item, table, div.shop, div.toolbar {
 		&:focus, &:hover {
 			color: #0f698d;
 		} 
+		&.btn {
+			color: white;
+		}
 		color: #0d96cd;
 		cursor: pointer;
 		text-decoration: none;

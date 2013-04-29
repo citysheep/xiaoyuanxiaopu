@@ -7,4 +7,9 @@ class Item < ActiveRecord::Base
   
   has_attached_file :photo, :styles => { :original => '400x400>', :small => '150x150' }
   self.per_page = 5
+
+	def self.search(search)
+	  search_condition = "%" + search + "%"
+	  find(:all, :conditions => ['name LIKE ? OR description LIKE ?', search_condition, search_condition])
+	end  
 end
