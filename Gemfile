@@ -20,7 +20,6 @@ end
 
 group :production do
   gem 'therubyracer', '0.10.2'
-  gem "mysql2"
 end
 
 group :development do
@@ -39,6 +38,8 @@ gem 'bootstrap-sass'
 
 # To use debugger
 # gem 'ruby-debug'
+
+gem "mysql2"
 
 gem 'geokit-rails3'
 
