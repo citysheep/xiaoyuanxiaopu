@@ -6,6 +6,7 @@ class FollowsController < ApplicationController
   # GET /follows.json
   def index
     @shops = current_user.followed_shops.paginate(:page => params[:page])
+    @page_title = "您关注的小铺"
     @follow = true
     respond_to do |format|
       format.html { render "shops/index" }
@@ -21,7 +22,7 @@ class FollowsController < ApplicationController
 
     respond_to do |format|
       if @follow.save
-        format.html { redirect_to @follow, :notice =>  '成功添加關注!' }
+        format.html { redirect_to @follow, :notice =>  '关注小铺成功!' }
         format.json { render :json => @follow, :status => :created, :location => @follow }
       else
         format.html { render :action => "new" }

@@ -34,11 +34,11 @@
   <dt>自我介绍</dt>
   <dd><%= shop.description %></dd>
   <% end%>
-  <dt>小铺位置</dt>
-  <dd>
-    <a data-toggle="modal" data-target="#shop-map-modal">点击查看</a>
-  </dd>
 </dl>
+<div class="row">
+  <div class="span1"></div>
+  <div class="span6 well" id="shop-map"></div>
+</div>
 <% 
   pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.mywebmarket.net/#{shop.items.last.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
 %>
@@ -54,7 +54,7 @@
 	</div>
 	<!-- JiaThis Button END -->	
 </div>
-<div class="modal hide fade" tabindex="-1" role="dialog" id="shop-map-modal">
+<!-- <div class="modal hide fade" tabindex="-1" role="dialog" id="shop-map-modal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><%= shop.name %>的位置</h3>
@@ -64,7 +64,7 @@
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">关闭</a>
   </div>
-</div>
+</div> -->
 <script type = "text/javascript">
   var shopLocation = new google.maps.LatLng(<%= shop.lat %>, <%= shop.lng %>);
   var shopMap = new MyWebMarket.Models.Map({
@@ -73,17 +73,23 @@
     location: shopLocation,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }); 
-  var shopMapView;
-  $('#shop-map-modal').on('shown', function () {
-    if(!shopMapView){
-      shopMapView = new MyWebMarket.Views.MapView({
-        model: shopMap,
-        clickable: false,
-        changable: false
-        });
-      $("div#shop-map").html($(shopMapView.render().el));    
-    }
-  });
+  var shopMapView = new MyWebMarket.Views.MapView({
+    model: shopMap,
+    clickable: false,
+    changable: false
+    });
+  $("div#shop-map").html($(shopMapView.render().el));   
+
+  // $('#shop-map-modal').on('shown', function () {
+  //   if(!shopMapView){
+  //     shopMapView = new MyWebMarket.Views.MapView({
+  //       model: shopMap,
+  //       clickable: false,
+  //       changable: false
+  //       });
+  //     $("div#shop-map").html($(shopMapView.render().el));    
+  //   }
+  // });
   
   var follow = new MyWebMarket.Models.Follow({shop_id: <%= shop.id %>});
   <% if user_signed_in? && follow = shop.follows.select {|follow| follow.user_id == current_user.id}.first %>

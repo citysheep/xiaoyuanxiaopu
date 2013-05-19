@@ -6,9 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
- 	  <a class="brand" href="#"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %>校园小铺</a>      
+ 	  <a class="brand" href="/"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %>校园小铺</a>      
     <div class="nav-collapse collapse">
 			<ul class="nav pull-right">
+				<li><a class="hint" href="<%= follows_path %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的关注"><i class="icon-heart icon-white"></i></a></li>
+				<li><a class="hint" href="/messages" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的信箱"><i class="icon-envelope icon-white"></i></a></li>
 	    		<% if user_signed_in? %>		
 				<li><a class="name" href="<%= user_path(current_user) %>"><i class="icon-user icon-white"></i> <%= current_user.name %></a></li>
 				<li><a class="hint" href="<%= shops_path(:user_id => current_user.id) %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的小铺"><i class="icon-home icon-white"></i></a></li>
@@ -17,18 +19,11 @@
 			    <li><%= link_to "注册", new_registration_path(:user) %></li>
   	  			<li><%= link_to "登入", new_session_path(:user) %></li>
 				<% end %>
-				<li><a class="hint" href="<%= follows_path %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的关注"><i class="icon-heart icon-white"></i></a></li>
-				<li><a class="hint" href="<%= messages_path(:user) %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的信箱"><i class="icon-envelope icon-white"></i></a></li>
   	  		</ul>
 			<ul class="nav">
-			  <!-- <li><a href="/">首页</a></li> -->
 			  <li><%= link_to "附近小铺", shops_path %></li>
-
 			  <li><%= link_to "所有货物", items_path(:page=>1) %></li>
-			  <!-- <li><%= link_to "创建小铺", new_shop_path %></li> -->
 			  <% if user_signed_in? %><li><%= link_to "我的关注", follows_path %></li><% end %>
-			  <!-- <li><%= link_to "我的帐户", user_path(:id => "profile") %></li> -->
-			  <!-- <li><%= link_to "我的信箱", messages_path %></li> -->
 			  <form class="navbar-search" action="search">
 			  	<input name="search" type="text" data-provide="typeahead" class="span2 search-query" placeholder="想找什么呢？" />
 			  	<a href="#" onclick="$(this).closest('form').submit(); return false;"><i class="icon-search icon-white"></i></a>

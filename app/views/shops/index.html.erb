@@ -34,7 +34,7 @@
 <div class="row">
   <div class="span1"></div>
   <div class= "toolbar span7">
-    <span>您附近的小铺</span>
+    <span><%= @page_title %></span>
     <%= link_to "创建小铺", new_shop_path %> |
     <%= link_to "发布新货", new_item_path %> |
     <a data-toggle="modal" data-target="#map-modal">更改当前位置</a>
@@ -60,27 +60,12 @@
 <div class="span4 shop">
       <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small></h3>
       <p>掌柜: <%= link_to shop.user.name, shop.user %> 创立于: <%= shop.created_at.to_date.to_s %></p>
-      <% if item %><p><span class="label label-success">最新消息</span> 发布新货 <%= link_to item.name, item %></p><% end %>
+      <% if item %>
+      <p><span class="label label-success">最新消息</span> 发布新货 <%= link_to item.name, item %></p>
         <% if item.photo.file? %>
             <div class="span3"><a href="<%= item_path(item) %>" class="img-container"><img src="<%= item.photo.url %>"></a></div>
-        <% end %>
-<!--       <div id="myCarousel" class="carousel slide">
-        <div class="carousel-inner">
-        <% shop.items.each do |i| %>
-          <% if i.photo.file? %>
-              <div class="item"><a href="#" class="img-container"><img src="<%= i.photo.url %>"></a></div>
-          <% end %>
-          <% end %>
-        </div>   
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-      </div> -->
-
-<!--       <% shop.items.each do |i| %>
-        <% if i.photo.file? %>
-            <div class="span2"><a href="#" class="img-container"><img src="<%= i.photo.url %>"></a></div>
-        <% end %>
-      <% end %> -->
+        <% end %>      
+      <% end %>
       <% 
         pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.mywebmarket.net/#{shop.items.last.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
       %>

@@ -28,8 +28,10 @@ class ShopsController < ApplicationController
 
     if params[:user_id]
       @shops = @shops.where(:user_id=>params[:user_id])
+      @page_title = "#{User.find(params[:user_id]).name}的小铺"
     else
       @shops = @shops.select{|s| s.items.count > 0}
+      @page_title = "您附近的小铺"
     end
 
     @shops = @shops.paginate(:page => params[:page])
