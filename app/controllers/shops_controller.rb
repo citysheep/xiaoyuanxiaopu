@@ -91,6 +91,8 @@ class ShopsController < ApplicationController
   def create
     params[:shop][:user_id] = current_user.id
     @shop = Shop.new(params[:shop])
+    @shop.city_id = City.geo_scope(:origin => @shop, :within => 15).order("distance asc").first.id
+
     @popup = true
     respond_to do |format|
       if @shop.save
@@ -108,6 +110,7 @@ class ShopsController < ApplicationController
   def update
     if is_shop_owner params[:id]
       @shop = Shop.find(params[:id])
+      params[:shop][:city_id] = City.geo_scope(:origin => @shop, :within => 15).order("distance asc").first.id
 
       respond_to do |format|
         if @shop.update_attributes(params[:shop])

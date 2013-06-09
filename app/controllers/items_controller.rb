@@ -101,6 +101,7 @@ class ItemsController < ApplicationController
       shop = Shop.find(params[:item][:shop_id])
       params[:item][:lat] = shop.lat
       params[:item][:lng] = shop.lng
+      params[:item][:city_id] = shop.city_id
     end
     
     @item = Item.new(params[:item])

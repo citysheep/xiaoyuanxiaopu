@@ -1,5 +1,7 @@
 MyWebMarket::Application.routes.draw do 
 
+  resources :cities
+
   resources :follows
 
   devise_for :users do

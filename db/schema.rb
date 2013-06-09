@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316050009) do
+ActiveRecord::Schema.define(:version => 20130606152925) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20130316050009) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cities", :force => true do |t|
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130316050009) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "shop_id"
+    t.integer  "city_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -78,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130316050009) do
     t.datetime "updated_at"
     t.float    "lat"
     t.float    "lng"
+    t.integer  "city_id"
   end
 
   create_table "users", :force => true do |t|

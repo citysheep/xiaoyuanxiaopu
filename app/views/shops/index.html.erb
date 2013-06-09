@@ -58,12 +58,14 @@
   item = shop.items.last
 %>
 <div class="span4 shop">
-      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <small><%= shop.items.count %>件货</small></h3>
-      <p>掌柜: <%= link_to shop.user.name, shop.user %> 创立于: <%= shop.created_at.to_date.to_s %></p>
+      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <span class="label label-info"><% if shop.city %><%= shop.city.name %><% end %></span></h3>
+      <p><small><%= shop.following_users.count %>人关注 ｜ 发布<%= shop.items.count %>件货</small></p>
       <% if item %>
       <p><span class="label label-success">最新消息</span> 发布新货 <%= link_to item.name, item %></p>
         <% if item.photo.file? %>
             <div class="span3"><a href="<%= item_path(item) %>" class="img-container"><img src="<%= item.photo.url %>"></a></div>
+        <% else %>
+            <%= image_tag "noimage.jpg", :class => "img-rounded" %>
         <% end %>      
       <% end %>
       <% 
