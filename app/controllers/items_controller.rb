@@ -80,8 +80,6 @@ class ItemsController < ApplicationController
   # GET /items/new.json
   def new
     @item = Item.new
-    @item.lat = session[:location] ? session[:location][:lat] : geo_lat
-    @item.lng = session[:location] ? session[:location][:lng] : geo_lng
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @item }
@@ -96,14 +94,13 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     params[:item][:user_id] = current_user.id
-    
-    if params[:item][:shop_id] && params[:item][:shop_id]!=""
-      shop = Shop.find(params[:item][:shop_id])
-      params[:item][:lat] = shop.lat
-      params[:item][:lng] = shop.lng
-      params[:item][:city_id] = shop.city_id
-    end
-    
+    shop = Shop.find(params[:item][:shop_id])
+    params[:item].merge!({
+      lat: shop.lat,
+      lng: shop.lng,
+      user_id: current_user.id
+    })
+
     @item = Item.new(params[:item])
     @popup = true
 

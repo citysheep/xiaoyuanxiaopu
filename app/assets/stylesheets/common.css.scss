@@ -1,10 +1,10 @@
-div#new-item-map, div#map, div#map-modal, div#shop-map-modal {
+div#map-modal, div#shop-map-modal {
 	div#map-canvas{
 		height: 350px;
 	}
 }
 
-div#map, div#shop-map {
+div#map, div#shop-map, div#new-item-map {
 	div#map-canvas{
 		height: 200px;
 	}

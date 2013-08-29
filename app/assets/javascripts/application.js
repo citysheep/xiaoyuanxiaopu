@@ -9,6 +9,7 @@
 //= require underscore
 //= require backbone
 //= require bootstrap
+//= require jquery_nested_form
 //
 //= require my_web_market
 //

@@ -42,15 +42,6 @@ class ShopsController < ApplicationController
     end
   end
 
-  def frontpage
-    @shops = Shop.find(:all, :order => "created_at desc", :limit => 6)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @shops }
-    end
-  end
-
   # GET /shops/1
   # GET /shops/1.json
   def show
@@ -72,6 +63,7 @@ class ShopsController < ApplicationController
     @shop = Shop.new
     @shop.lat = session[:location] ? session[:location][:lat] : geo_lat
     @shop.lng = session[:location] ? session[:location][:lng] : geo_lng
+    @shop.items.build
 
     respond_to do |format|
       format.html # new.html.erb

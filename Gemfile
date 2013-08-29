@@ -64,3 +64,5 @@ gem 'omniauth-facebook'
 gem 'renren'
 
 gem 'mina'
+
+gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
