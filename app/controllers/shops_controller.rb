@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require 'will_paginate/array' 
+require 'will_paginate/array'
 
 class ShopsController < ApplicationController
   geocode_ip_address
@@ -60,10 +60,7 @@ class ShopsController < ApplicationController
   # GET /shops/new
   # GET /shops/new.json
   def new
-    @shop = Shop.new
-    @shop.lat = session[:location] ? session[:location][:lat] : geo_lat
-    @shop.lng = session[:location] ? session[:location][:lng] : geo_lng
-    @shop.items.build
+    @shop = create_shop()
 
     respond_to do |format|
       format.html # new.html.erb

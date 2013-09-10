@@ -1,20 +1,20 @@
-<div id="myCarousel" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="active item">
-    <%= render "layouts/header1" %>
-    </div>
-    <div class="item">
-    <%= render "layouts/header2" %>
-    </div>
-  </div>
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
+<!--<div id="myCarousel" class="carousel slide">-->
+  <!--<ol class="carousel-indicators">-->
+    <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+  <!--</ol>-->
+  <!--<div class="carousel-inner">-->
+    <!--<div class="active item">-->
+    <!--<%= render "layouts/header1" %>-->
+    <!--</div>-->
+    <!--<div class="item">-->
+    <!--<%= render "layouts/header2" %>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>-->
+  <!--<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>-->
+<!--</div>-->
 <div class="row">
   <div class="span7">
     <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
@@ -52,6 +52,7 @@
     <% end %>
   </div>
 <% end %>
+
 <% @shops.each do |shop| %>
 <% 
   url = "http://www.mywebmarket.net/shops/#{shop.id}" 

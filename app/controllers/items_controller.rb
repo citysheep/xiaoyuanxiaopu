@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
       @lng = geo_lng
     end
 
-    items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
+    items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "created_at desc")
     # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
 
     @cid = params[:category_id]
@@ -79,10 +79,19 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
-    @item = Item.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @item }
+    if current_user.shops
+      @item = Item.new
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render :json => @item }
+      end
+    else
+    # if there is no shop - return creation shop form
+      @shop = ShopsHelper::create_shop()
+      respond_to do |format|
+        format.html { render "shops/new" }
+        format.json { render :json => @shop }
+      end
     end
   end
 
@@ -93,12 +102,10 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    params[:item][:user_id] = current_user.id
     shop = Shop.find(params[:item][:shop_id])
     params[:item].merge!({
       lat: shop.lat,
       lng: shop.lng,
-      user_id: current_user.id
     })
 
     @item = Item.new(params[:item])

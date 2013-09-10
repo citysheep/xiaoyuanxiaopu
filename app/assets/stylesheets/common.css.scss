@@ -44,16 +44,16 @@ dl.show-message {
 		margin-bottom: 15px;
 	}
 }
+//
+//img.thumbnail {
+//	width: 300px;
+//	height: 200px
+//}
 
-img.thumbnail {
-	width: 300px;
-	height: 200px
-}	
-
-img.login {
-	height: 25px;
-	border:0px;
-}	
+//img.login {
+//	height: 25px;
+//	border:0px;
+//}
 
 div.shop {
 	border-bottom: solid 1px #DCDCD5;
@@ -68,33 +68,33 @@ div.toolbar {
 	font-weight: bold;
 }
 
-div.item, table, div.shop, div.toolbar {
-	a {
-		&:focus, &:hover {
-			color: #0f698d;
-		} 
-		&.btn {
-			color: white;
-		}
-		color: #0d96cd;
-		cursor: pointer;
-		text-decoration: none;
-		font-weight: bold;
-	}
-
-	a.item-name, a.shop-name {
-	  	text-decoration: none;
-	  	color: #393E40;
-		cursor: pointer;
-	  	&:hover, &:focus {
-			color: #0078a3;
-		}
-	}
-}	
-
-div.item-image-span {
-  	padding-right: 20px;
-}  
+//div.item, table, div.shop, div.toolbar {
+//	a {
+//		&:focus, &:hover {
+//			color: #0f698d;
+//		}
+//		&.btn {
+//			color: white;
+//		}
+//		color: #0d96cd;
+//		cursor: pointer;
+//		text-decoration: none;
+//		font-weight: bold;
+//	}
+//
+//	a.item-name, a.shop-name {
+//	  	text-decoration: none;
+//	  	color: #393E40;
+//		cursor: pointer;
+//	  	&:hover, &:focus {
+//			color: #0078a3;
+//		}
+//	}
+//}
+//
+//div.item-image-span {
+//  	padding-right: 20px;
+//}
   
 div#share-bar {
   	margin-left: 15px;
@@ -106,44 +106,147 @@ div.alert-no-item {
 
 div.renren-follow { text-align: center; }  
   
-div.navbar{  
-	div.btn-group {
-		line-height: 55px;
+div.navbar{
+//	div.btn-group {
+//		line-height: 55px;
+//	}
+	img.img-small {
+		width: 40px;
 	}
-	img.img-small { 
-		width: 40px; 
-		margin-right: 12px;
-	}  
-	a.brand, a.name {
-	    color:white;
-	}
- 	form {
-	    line-height:48px;
+//	a.brand, a.name {
+//	    color:white;
+//	}
+	form {
+	    line-height: 56px;
 	    margin-left: 20px;
-	}	
-	b.dropdown-icon {
-		margin-top: 14px;
-	}	
+	}
+//	b.dropdown-icon {
+//		margin-top: 14px;
+//	}
 	ul.nav{
 		li {
 			a {
 	    		line-height:40px;
-			}	
+			}
 		}
-	}	
-}	
-
-.img-container {
-	width: 150px;
-	height: 150px;
-	display: inline-block;
-	overflow: hidden;
+	}
+    .navbar-unread {
+      display: block;
+    }
 }
-.img-container img {
-	width: 100%;
-}
+//
+//.img-container {
+//	width: 150px;
+//	height: 150px;
+//	display: inline-block;
+//	overflow: hidden;
+//}
+//.img-container img {
+//	width: 100%;
+//}
 
 div.header {
 	margin-top: 20px;
 	margin-bottom: 10px;	
+}
+
+div.container-narrow {
+  max-width: 700px;
+  margin: 0 auto 15px auto;
+}
+
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.item-container {
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  div.sidebar {
+    border-right: 1px solid #DDDDDD;
+    font-size: 16px;
+    span{
+      display: block;
+      text-align: center;
+      margin-bottom: 4px;
+      &.month, &.year {
+        line-height: 8px;
+      }
+      &.year {
+        order-bottom: 1px solid #DDDDDD;
+        padding-bottom: 8px;
+      }
+      &.day {
+        font-size: 30px;
+        line-height: 25px;
+        font-weight: bold;
+      }
+      &.shop {
+        margin-top:20px;
+      }
+      &.shop-follow {
+        font-size:  12px;
+      }
+    }
+  }
+}
+
+div.sidebar {
+  div.widget {
+    margin-bottom: 10px;
+    h5 {
+      margin-bottom: 6px;
+      color: #999;
+      font-size: 16px;
+    }
+    ul {
+      margin: 0px;
+      li {
+        padding: 5px 0px;
+        list-style: none;
+      }
+    }
+  }
+}
+
+
+span.tags {
+  border: none;
+  span.tag {
+    padding: 2px 4px;
+    &:hover{
+      padding: 2px 6px;
+    }
+    &.city {
+      background-color: #9B59B6;
+    }
+    &.category {
+      background-color: #3498DB;
+    }
+    &.soldout {
+      background-color: #E67E22;
+    }
+    &.price {
+      background-color: #1ABC9C;
+    }
+    font-size: 12px;
+  }
+}
+
+div.pagination {
+  li.previous_page, li.next_page {
+    display: none;
+  }
+}
+
+a {
+  color: #27CFC3;
+  text-decoration: none;
+  &:hover {
+    color: #444;
+    cursor: pointer;
+  }
 }

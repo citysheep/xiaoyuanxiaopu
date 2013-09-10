@@ -1,38 +1,57 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<%= params[:controller]  %>
+<span class="fui-gear"></span>
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
- 	  <a class="brand" href="/"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %>校园小铺</a>      
-    <div class="nav-collapse collapse">
-			<ul class="nav pull-right">
-				<li><a class="hint" href="<%= follows_path %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的关注"><i class="icon-heart icon-white"></i></a></li>
-				<li><a class="hint" href="/messages" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的信箱"><i class="icon-envelope icon-white"></i></a></li>
-	    		<% if user_signed_in? %>		
-				<li><a class="name" href="<%= user_path(current_user) %>"><i class="icon-user icon-white"></i> <%= current_user.name %></a></li>
-				<li><a class="hint" href="<%= shops_path(:user_id => current_user.id) %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="我的小铺"><i class="icon-home icon-white"></i></a></li>
-				<li><a class="hint" href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="登出"><i class="icon-off icon-white"></i></a></li>
-				<% else %>
-			    <li><%= link_to "注册", new_registration_path(:user) %></li>
-  	  			<li><%= link_to "登入", new_session_path(:user) %></li>
-				<% end %>
-  	  		</ul>
-			<ul class="nav">
-			  <li><%= link_to "附近小铺", shops_path %></li>
-			  <li><%= link_to "所有货物", items_path(:page=>1) %></li>
-			  <% if user_signed_in? %><li><%= link_to "我的关注", follows_path %></li><% end %>
-			  <form class="navbar-search" action="search">
-			  	<input name="search" type="text" data-provide="typeahead" class="span2 search-query" placeholder="想找什么呢？" />
-			  	<a href="#" onclick="$(this).closest('form').submit(); return false;"><i class="icon-search icon-white"></i></a>
-			  </form>
-			</ul>      	
-	  </div><!--/.nav-collapse -->      
-    </div>    
+    <div class="container">
+      <a class="brand" href="/"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %></a>
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
+      <div class="nav-collapse collapse" id="nav-collapse-01">
+        <ul class="nav">
+          <li class="<%= 'active' if params[:controller] == 'items' %>">
+            <%= link_to "最新商品", items_path %>
+          </li>
+          <li class="<%= 'active' if params[:controller] == 'shops' %>">
+            <%= link_to "周边小铺", shops_path %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="<%= 'active' if params[:controller] == 'follows' %>"><a class="hint" href="<%= follows_path %>">我的关注</a></li>
+            <li class="<%= 'active' if params[:controller] == 'messages' %>">
+              <a class="hint" href="/messages">信箱</a>
+              <% if user_signed_in? && current_user.unread_message_count > 0 %>
+                <span class="navbar-unread"><%= current_user.unread_message_count%></span>
+              <% end %>
+            </li>
+        <% end %>
+        </ul>
+      </div>
+      <form class="navbar-search" action="search">
+        <input type="search" data-provide="typeahead" class="span2 search-query" placeholder="想找什么呢？" />
+        <!--<button type="Submit"><i class="icon-search"></i></button>-->
+        <a href="#" onclick="$(this).closest('form').submit(); return false;"><i class="icon-search"></i></a>
+      </form>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-02"></button>
+      <div class="nav-collapse collapse" id="nav-collapse-02">
+        <ul class="nav pull-right">
+          <% if user_signed_in? %>
+            <li><a class="name" href="<%= user_path(current_user) %>"><%= current_user.name %><i class="icon-th-list"></i></a>
+              <ul>
+                <li><a class="hint" href="/messages">我的信箱</a></li>
+                <li><a class="hint" href="<%= follows_path %>">我的关注</a></li>
+                <li><a class="hint" href="<%= shops_path(:user_id => current_user.id) %>">我的小铺</a></li>
+                <li><a class="hint" href="<%= destroy_user_session_path %>">登出</a></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "注册", new_registration_path(:user) %></li>
+            <li><%= link_to "登入", new_session_path(:user) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
+
 <script type="text/javascript">
 $('.search-query').typeahead({
     source: function (query, process) {

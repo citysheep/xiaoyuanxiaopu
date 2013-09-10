@@ -1,28 +1,52 @@
-<iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://widget.renren.com/plugin/followbutton?page_id=699228041&color=1&model=1" style="width:150px;height:40px;" ></iframe>    
 <% if user_signed_in? && current_user.unread_message_count > 0 %>
 <div class="alert alert-block">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <h4><%= link_to "您有未读信息", messages_path %><span class="badge badge-important"><%= current_user.unread_message_count%></span></h4>
 </div>
 <% end %>
-<div class="well">
-  <ul class="nav nav-list">
-    <li class="nav-header">快速链接</li>
-    <li><%= link_to "创建小铺", new_shop_path %></li>
-    <li><%= link_to "发布新货", new_item_path %></li>
-  </ul>
-</div>
-<div class="well">
-  <ul class="nav nav-list">
-    <li class="nav-header">货物分类</li>
-    <% Category.all.each do |category| %>
-    <li><%= link_to category.name, category_items_path(category) %></li>
-    <% end %>
-  </ul>
-</div>
-<div class="well">
-  <h5>热门小铺</h5>
-  最热校园小铺正在评选中
+
+
+<div class="container sidebar">
+  <div class="widget">
+    <h5>关注我们</h5>
+    <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://widget.renren.com/plugin/followbutton?page_id=699228041&color=1&model=1" style="width:150px;height:40px;" ></iframe>
+
+  </div>
+
+  <div class="widget">
+    <h5>站内导航</h5>
+    <ul>
+      <li><%= link_to "创建小铺", new_shop_path, :class=>"btn btn-primary" %></li>
+      <li><%= link_to "发布新货", new_item_path, :class=>"btn btn-primary"%></li>
+      <li><a data-toggle="modal" data-target="#map-modal" class="btn btn-primary">更改当前位置</a><li>
+      <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>请选择您的当前位置</h3>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-primary confirm">确定</a>
+          <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+  <div class="widget">
+    <h5>货物分类</h5>
+    <ul>
+      <% Category.all.each do |category| %>
+        <li><%= link_to category.name, category_items_path(category) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="widget">
+    <h5>热门小铺</h5>
+
+  </div>
 </div>
 
 <!-- <div class="well">
@@ -32,6 +56,61 @@
 <!--  <div class="row-fluid">
   <iframe scrolling="no" frameborder="0" src="http://www.connect.renren.com/widget/liveWidget?api_key=8acfecc266db419faccbe06059c43865&xid=mywebmarket&desp=%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%A0%A1%E5%9B%AD%E5%B0%8F%E9%93%BA" style="width: 280px;height: 390px;"></iframe>   
 </div> -->
-<div class="row-fluid">
-	<fb:like-box href="http://www.facebook.com/MyWebMarketCommunity" width="270" height="600" show_faces="true" stream="true" header="true"></fb:like-box>
-</div>
+<!--<div class="row-fluid">-->
+	<!--<fb:like-box href="http://www.facebook.com/MyWebMarketCommunity" width="270" height="600" show_faces="true" stream="true" header="true"></fb:like-box>-->
+<!--</div>-->
+
+<script type = "text/javascript">
+  center = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
+  var map = new MyWebMarket.Models.Map({
+    zoom: 10,
+    center: center,
+    location: center,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var mapPopup = $("div#map-modal > div.modal-body");
+  var mapView;
+  $('#map-modal').on('shown', function () {
+    if(!mapView){
+      mapView = new MyWebMarket.Views.MapView({
+        model: map,
+        clickable: true,
+        changable: true
+      });
+      mapPopup.html($(mapView.render().el));
+    }
+  });
+
+  <% if !session[:location] %>
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        function( position ){
+          map.set("location", new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+          setUrl(map);
+        },
+        function( error ){
+          // TODO
+        }
+    );
+  } else {
+    $("#map-modal").show();
+  }
+  <% end %>
+
+  //TODO - use backbone to handle all the views - should be ajax
+  $("div.modal-footer > a.confirm").click(function(){
+    setUrl(map);
+  });
+
+  function setUrl(model) {
+    var locationParam = "";
+    if(model){
+      var latLng = model.get("location");
+      if(latLng){
+        locationParam = "?lat=" + latLng.lat() + "&lng=" + latLng.lng();
+      }
+    }
+    location.href = "/items" + locationParam;
+  }
+</script>

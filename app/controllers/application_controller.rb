@@ -16,4 +16,18 @@ class ApplicationController < ActionController::Base
   def geo_address(lat, lng)
     (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [lat, lng]).full_address
   end
+
+  def create_shop
+    shop = Shop.new
+    if session[:location]
+      shop.lat = session[:location][:lat]
+      shop.lng = session[:location][:lng]
+    else
+      shop.lat = geo_lat
+      shop.lng = geo_lng
+    end
+    shop.items.build
+    shop
+  end
+
 end

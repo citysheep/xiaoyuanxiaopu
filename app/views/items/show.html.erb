@@ -23,12 +23,8 @@
   	<% end %>	
   </h1>
 	<p>
-		<% if item.shop %>
-		<%= link_to item.shop.name, item.shop %> 发布于 <%= item.created_at.localtime.to_s(:db) %> 
-		<% else %>			
-		<%= link_to item.user.name, item.user %> 发布于 <%= item.created_at.localtime.to_s(:db) %> 
-		<% end %>
-	</p>		
+		<%= link_to item.shop.name, item.shop %> 发布于 <%= item.created_at.localtime.to_s(:db) %>
+	</p>
 </div>
 <dl class="dl-horizontal">
   <% if item.description && item.description != "" %>
@@ -52,7 +48,7 @@
 	<div class="span6">
 		<div class="row">
 			<div class="btn-group">
-				<% if user_signed_in? && current_user.id == item.user.id %>
+				<% if user_signed_in? && current_user.id == item.shop.user.id %>
 					<%= link_to '更新商品资料', edit_item_path(item), :class => "btn btn-success" %>
 					<% if !item.buyer %>
 						<%= link_to '标为已售完', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-warning" %>
