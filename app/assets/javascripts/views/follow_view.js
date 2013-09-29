@@ -1,7 +1,7 @@
 MyWebMarket.Views.FollowView = Backbone.View.extend({ 
 	tagName: "a",
 	
-	className: "btn btn-success",
+	className: "btn btn-danger circle",
 
   events: {
     "click": "toggleFollow"

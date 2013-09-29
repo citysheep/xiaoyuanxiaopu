@@ -20,15 +20,8 @@ class ItemsController < ApplicationController
       }
     end
 
-    if session[:location]
-      @lat = session[:location][:lat]
-      @lng = session[:location][:lng]
-    else
-      @lat = geo_lat
-      @lng = geo_lng
-    end
-
-    items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "created_at desc")
+    location = curr_location
+    items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at desc")
     # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
 
     @cid = params[:category_id]
@@ -45,19 +38,12 @@ class ItemsController < ApplicationController
   end
 
   def search
-    if session[:location]
-      @lat = session[:location][:lat]
-      @lng = session[:location][:lng]
-    else
-      @lat = geo_lat
-      @lng = geo_lng
-    end
-
+    location = curr_location
     if params[:search]
       @items = Item.search params[:search]
     else
       # @items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
-      @items = Item.geo_scope(:origin=>[@lat, @lng]).order("distance asc", "buyer", "created_at desc")
+      @items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "buyer", "created_at desc")
     end
 
     @items = @items.paginate(:page => params[:page])
@@ -127,6 +113,11 @@ class ItemsController < ApplicationController
   def update
     if is_owner (@item)
       respond_to do |format|
+        shop = Shop.find(params[:item][:shop_id])
+        params[:item].merge!({
+                                 lat: shop.lat,
+                                 lng: shop.lng,
+                             })
         if @item.update_attributes(params[:item])
           format.html { redirect_to @item, :notice => '货物成功更新啦！' }
           format.json { head :ok }
@@ -152,7 +143,7 @@ class ItemsController < ApplicationController
   end
   
   def is_owner(item)
-    current_user.id == item.user.id
+    current_user.id == item.shop.user.id
   end  
 
 end

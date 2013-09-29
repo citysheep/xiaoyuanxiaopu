@@ -4,13 +4,18 @@ class ApplicationController < ActionController::Base
   # Auto-geocode the user's ip address and store in the session.
   geocode_ip_address
 
-  # Get address from IP, if cannot, use the default hardcoded one
-  def geo_lat
-    session[:geo_location] ? session[:geo_location].lat : 22.299842230893535   
-  end
-
-  def geo_lng
-    session[:geo_location] ? session[:geo_location].lng : 114.17249643179662  
+  def curr_location
+    if session[:location]
+      {
+        :lat => session[:location][:lat],
+        :lng => session[:location][:lng]
+      }
+    else
+      {
+        :lat => session[:geo_location] ? session[:geo_location].lat : 22.299842230893535,
+        :lng => session[:geo_location] ? session[:geo_location].lng : 114.17249643179662
+      }
+    end
   end
 
   def geo_address(lat, lng)
@@ -19,13 +24,9 @@ class ApplicationController < ActionController::Base
 
   def create_shop
     shop = Shop.new
-    if session[:location]
-      shop.lat = session[:location][:lat]
-      shop.lng = session[:location][:lng]
-    else
-      shop.lat = geo_lat
-      shop.lng = geo_lng
-    end
+    location = curr_location
+    shop.lat = location[:lat]
+    shop.lng = location[:lng]
     shop.items.build
     shop
   end

@@ -44,21 +44,15 @@ dl.show-message {
 		margin-bottom: 15px;
 	}
 }
-//
-//img.thumbnail {
-//	width: 300px;
-//	height: 200px
-//}
+
+img.thumbnail {
+	width: 300px;
+}
 
 //img.login {
 //	height: 25px;
 //	border:0px;
 //}
-
-div.shop {
-	border-bottom: solid 1px #DCDCD5;
-	padding-bottom: 10px;
-}
 
 div.toolbar {
 	font-size: 15px;
@@ -124,11 +118,20 @@ div.navbar{
 //		margin-top: 14px;
 //	}
 	ul.nav{
-		li {
-			a {
-	    		line-height:40px;
-			}
-		}
+      li {
+        a {
+          line-height:40px;
+        }
+      }
+      ul {
+        width: 120px;
+        text-align: center;
+        li {
+          a {
+            line-height: 20px;
+          }
+        }
+      }
 	}
     .navbar-unread {
       display: block;
@@ -163,8 +166,8 @@ div.container-narrow {
 
 div.item-container {
   border-bottom: 1px solid #DDDDDD;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-top: 30px;
   div.sidebar {
     border-right: 1px solid #DDDDDD;
     font-size: 16px;
@@ -221,16 +224,22 @@ span.tags {
       padding: 2px 6px;
     }
     &.city {
-      background-color: #9B59B6;
+      background-color: #3498DB;
     }
     &.category {
-      background-color: #3498DB;
+      background-color: #9B59B6;
     }
     &.soldout {
       background-color: #E67E22;
     }
     &.price {
       background-color: #1ABC9C;
+    }
+    &.follows {
+      background-color: #1ABC9C;
+    }
+    &.items {
+      background-color: #E67E22;
     }
     font-size: 12px;
   }
@@ -249,4 +258,32 @@ a {
     color: #444;
     cursor: pointer;
   }
+}
+
+h1.item-title, h1.shop-title {
+  span.tags {
+    line-height: 25px;
+    span.tag {
+      font-size: 16px;
+    }
+  }
+}
+
+.btn{
+  &.circle {
+    border-radius:50px;
+  }
+}
+
+div.sub-actions {
+  margin-right:50px;
+}
+
+div#shops-container {
+  div.shop {
+  }
+}
+
+div.new-shop-map {
+  margin-bottom: 30px;
 }
