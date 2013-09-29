@@ -156,8 +156,6 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (~> 0.3.0)
       mime-types
-    pg (0.16.0)
-    pg (0.16.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -246,7 +244,6 @@ DEPENDENCIES
   omniauth-qzone
   omniauth-renren
   paperclip (~> 2.7.0)
-  pg
   rails (= 3.2.13)
   renren
   sass-rails (~> 3.2.3)
