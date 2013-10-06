@@ -20,10 +20,8 @@ class User < ActiveRecord::Base
   def self.create_from_auth(hash)
     info = hash[:info]
     if info[:urls][:figureurl_1]
-      # qq
       open_link = info[:urls][:figureurl_1]
     else
-      # renren
       open_link = info[:urls][:Renren]
     end
     user_hash = {:name => info[:name], :open_id => info[:uid], :open_avatar => info[:image], :open_link => open_link}
