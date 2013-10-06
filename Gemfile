@@ -41,10 +41,8 @@ gem "bootstrap-will_paginate", "~> 0.0.9"
 
 gem 'simple_form'
 
-gem 'omniauth-renren'
-gem 'omniauth-qzone'
-gem 'omniauth-facebook'
-gem 'renren'
+gem 'omniauth-renren-oauth2'
+gem 'omniauth-qq-connect'
 
 gem 'mina'
 
