@@ -136,6 +136,14 @@ div.navbar{
     .navbar-unread {
       display: block;
     }
+    a {
+      i.icon-search {
+        margin: 5px;
+      }
+      i.icon-th-list {
+        margin: 3px;
+      }
+    }
 }
 //
 //.img-container {

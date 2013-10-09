@@ -33,6 +33,7 @@ MyWebMarket::Application.routes.draw do
   match 'location' => 'locations#get'
   match 'search' => 'items#search'
   match 'vote' => 'shops#show_shop_for_vote'
+  match 'nearby' => 'items#nearby'
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'

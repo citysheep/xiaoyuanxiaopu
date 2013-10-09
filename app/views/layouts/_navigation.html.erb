@@ -6,11 +6,14 @@
       <div class="nav-collapse collapse" id="nav-collapse-01">
         <ul class="nav">
           <li class="<%= 'active' if params[:controller] == 'items' && params[:action] == 'index' %>">
-            <%= link_to "最新商品", items_path %>
+            <%= link_to "最新货物", items_path %>
           </li>
-          <li class="<%= 'active' if params[:controller] == 'shops' && params[:action] == 'index' %>">
-            <%= link_to "周边小铺", shops_path %>
+          <li class="<%= 'active' if params[:controller] == 'items' && params[:action] == 'nearby' %>">
+            <%= link_to "附近货物", "nearby" %>
           </li>
+          <!--<li class="<%= 'active' if params[:controller] == 'shops' && params[:action] == 'index' %>">-->
+            <!--<%= link_to "周边小铺", shops_path %>-->
+          <!--</li>-->
           <% if user_signed_in? %>
             <li class="<%= 'active' if params[:controller] == 'follows' %>"><a class="hint" href="<%= follows_path %>">我的关注</a></li>
             <li class="<%= 'active' if params[:controller] == 'messages' %>">
@@ -32,7 +35,7 @@
       <div class="nav-collapse collapse" id="nav-collapse-02">
         <ul class="nav pull-right">
           <% if user_signed_in? %>
-            <li><a class="name" href="<%= user_path(current_user) %>"><%= current_user.name %><i class="icon-th-list"></i></a>
+            <li><a class="name" href="<%= user_path(current_user) %>"><i class="icon-th-list"></i><%= current_user.name %></a>
               <ul>
                 <li><a class="hint" href="/messages">我的信箱</a></li>
                 <li><a class="hint" href="<%= follows_path %>">我的关注</a></li>

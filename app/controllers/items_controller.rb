@@ -13,10 +13,19 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    @items = filter_items(Item.order("created_at desc"));
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => items }
+    end
+  end
+
+  def nearby
     if params[:lat] && params[:lng]
       session[:location] = {
-        :lat => params[:lat],
-        :lng => params[:lng]
+          :lat => params[:lat],
+          :lng => params[:lng]
       }
     end
 
@@ -24,17 +33,20 @@ class ItemsController < ApplicationController
     items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at desc")
     # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
 
-    @cid = params[:category_id]
-    if @cid
-      items = items.where(:category_id=>@cid)
-    end
-
-    @items = items.paginate(:page => params[:page])
+    @items = filter_items(items);
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => items }
+      format.html { render :index }
+      format.json { render :json => @items }
     end
+  end
+
+  def filter_items(items)
+    cid = params[:category_id]
+    if cid
+      items = items.where(:category_id=>@cid)
+    end
+    items.paginate(:page => params[:page])
   end
 
   def search
