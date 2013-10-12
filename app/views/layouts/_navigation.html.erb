@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/"><%= image_tag "/assets/logo.jpeg", :class=>"img-rounded img-small" %></a>
+      <a class="brand" href="/"><%= image_tag "/assets/logo_new.jpg", :class=>"img-rounded img-small" %></a>
       <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
       <div class="nav-collapse collapse" id="nav-collapse-01">
         <ul class="nav">
@@ -9,7 +9,7 @@
             <%= link_to "最新货物", items_path %>
           </li>
           <li class="<%= 'active' if params[:controller] == 'items' && params[:action] == 'nearby' %>">
-            <%= link_to "附近货物", "nearby" %>
+            <%= link_to "附近货物", "/nearby" %>
           </li>
           <!--<li class="<%= 'active' if params[:controller] == 'shops' && params[:action] == 'index' %>">-->
             <!--<%= link_to "周边小铺", shops_path %>-->
