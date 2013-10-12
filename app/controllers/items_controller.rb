@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   def filter_items(items)
     cid = params[:category_id]
     if cid
-      items = items.where(:category_id=>@cid)
+      items = items.where(:category_id=>cid)
     end
     items.paginate(:page => params[:page])
   end

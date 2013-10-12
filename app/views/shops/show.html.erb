@@ -1,6 +1,6 @@
 <% 
   shop = @shop
-  url = "http://www.mywebmarket.net/shops/#{shop.id}" 
+  url = "http://www.xiaoyuanxiaopu.com/shops/#{shop.id}"
 %>  
 <% content_for :meta do %>
   <meta property="og:title" content="<%= shop.name %>"/>
@@ -20,10 +20,10 @@
   <p><%= link_to shop.user.name, shop.user %>创立于<%= shop.created_at.localtime.to_date.to_s(:db) %> |
     <%= shop.follows.count %>人关注 |
     <%= shop.items.count %>件货
+    <% if shop.description && shop.description != "" %>
+      | <%= shop.description %>
+    <% end%>
   </p>
-  <% if shop.description && shop.description != "" %>
-  <p><%= shop.description %></p>
-  <% end%>
   <div class="pull-right sub-actions" id="shop-actions">
     <% if user_signed_in? && current_user.id == shop.user.id %>
       <%= link_to '更新资料', edit_shop_path(shop), :class => "btn btn-danger circle" %>
@@ -39,17 +39,20 @@
     </div>
   </div>
   <%
-     pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.mywebmarket.net/#{shop.items.last.photo.url}" : "http://www.mywebmarket.net/assets/logo.jpeg"
+     pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.xiaoyuanxiaopu.com/#{shop.items.last.photo.url}" : "http://www.xiaoyuanxiaopu.com/assets/logo_new.jpg"
   %>
-  <div class="row" id="share-bar" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', '<%= pic_url %>');">
+  <div id="share-bar" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', '<%= pic_url %>');">
     <!-- JiaThis Button BEGIN -->
-    <div id="jiathis_style_32x32">
-      <a class="jiathis_button_qzone"></a>
-      <a class="jiathis_button_renren"></a>
+    <div class="jiathis_style_24x24">
+      <span class="jiathis_txt">分享到：</span>
+      <a class="jiathis_button_ishare"></a>
       <a class="jiathis_button_weixin"></a>
-      <a class="jiathis_button_tqq hidden-phone"></a>
-      <a class="jiathis_button_tsina hidden-phone"></a>
-      <a href="http://www.jiathis.com/share" class="hidden-phone jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+      <a class="jiathis_button_tsina"></a>
+      <a class="jiathis_button_douban"></a>
+      <a class="jiathis_button_renren"></a>
+      <a class="jiathis_button_qzone"></a>
+      <a class="jiathis_button_feixin"></a>
+      <a class="jiathis_counter_style"></a>
     </div>
     <!-- JiaThis Button END -->
   </div>

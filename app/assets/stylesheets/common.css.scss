@@ -222,6 +222,9 @@ div.sidebar {
       li {
         padding: 5px 0px;
         list-style: none;
+        a {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -298,4 +301,11 @@ div#shops-container {
 
 div.new-shop-map {
   margin-bottom: 30px;
+}
+
+div#share-bar {
+  height: 50px;
+  span.jiathis_txt {
+    font-size: 16px;
+  }
 }

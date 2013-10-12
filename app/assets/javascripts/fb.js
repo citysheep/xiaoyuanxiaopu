@@ -1,7 +1,7 @@
 window.fbAsyncInit = function() {
 	FB.init({
 		appId : '208690692477625', // App ID
-		channelUrl : 'http://www.mywebmarket.net/', // Channel File
+		channelUrl : 'http://www.xiaoyuanxiaopu.com/', // Channel File
 		status : true, // check login status
 		cookie : true, // enable cookies to allow the server to access the session
 		xfbml : true  // parse XFBML

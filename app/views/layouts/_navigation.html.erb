@@ -15,7 +15,7 @@
             <!--<%= link_to "周边小铺", shops_path %>-->
           <!--</li>-->
           <% if user_signed_in? %>
-            <li class="<%= 'active' if params[:controller] == 'follows' %>"><a class="hint" href="<%= follows_path %>">我的关注</a></li>
+            <!--<li class="<%= 'active' if params[:controller] == 'follows' %>"><a class="hint" href="<%= follows_path %>">我的关注</a></li>-->
             <li class="<%= 'active' if params[:controller] == 'messages' %>">
               <a class="hint" href="/messages">我的信箱</a>
               <% if user_signed_in? && current_user.unread_message_count > 0 %>
