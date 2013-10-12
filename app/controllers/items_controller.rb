@@ -111,7 +111,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, :notice => "<h4>货物成功发布啦！</h4><p></p><a class='social-share btn btn-info'>和好友分享</a>".html_safe }
+        format.html { redirect_to @item, :notice => "<h4>货物成功发布啦！<a class='social-share'>点击这里和好友分享</a></h4>".html_safe }
         format.json { render :json => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }

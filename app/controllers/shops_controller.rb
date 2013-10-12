@@ -78,7 +78,7 @@ class ShopsController < ApplicationController
     @popup = true
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to @shop, :notice => "<h4>恭喜！您的小铺成功开张啦！</h4><p>但是<strong>只有发布过货物的小铺才可以显示在首页</strong>哦。您可以#{view_context.link_to('点击这里', new_item_path)}发布新货。<p><a class='social-share btn btn-info'>和好友分享</a></p>".html_safe }
+        format.html { redirect_to @shop, :notice => "<h4>恭喜！您的小铺成功开张啦！<a class='social-share'>点击这里和好友分享</a></h4><p>但是<strong>只有发布过货物的小铺才可以显示在首页</strong>哦。您可以#{view_context.link_to('点击这里', new_item_path)}发布新货。".html_safe }
         format.json { render :json => @shop, :status => :created, :location => @shop }
       else
         format.html { render :action => "new" }

@@ -1,6 +1,7 @@
 <% if @items.length == 0 %>
   <div class="alert alert-no-item">
-    <h4>暂时没有货物呢,只有发布过货物的小铺才可以显示在首页哦, 您可以<%= link_to "点击这里", new_item_path %>发布新货。</h4>
+    <h4>暂时没有货物呢,只有发布过货物的小铺才可以显示在首页哦。</h4>
+    <h4>您可以<%= link_to "点击这里", new_item_path %>发布新货。</h4>
   </div>
 <% end %>
 <% @items.each do |item| %>
