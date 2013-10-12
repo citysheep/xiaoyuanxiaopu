@@ -25,14 +25,13 @@
 	<p>
 		<%= link_to item.shop.name, item.shop %> 发布于 <%= item.created_at.localtime.to_s(:db) %>
 	</p>
-  <div class="pull-right sub-actions">
+  <div class="pull-right sub-actions" id="item-actions">
     <% if user_signed_in? && current_user.id == item.shop.user.id %>
       <%= link_to '更新资料', edit_item_path(item), :class => "btn btn-danger circle" %>
       <% if !item.buyer %>
-        <%= link_to '货物下架', item_path(item, :item => {:buyer => 1}), :method => :put, :class => "btn btn-danger circle" %>
+        <%= link_to '货物下架', item_path(item, :item => {:buyer => 1, :shop_id => item.shop.id}), :method => :put, :class => "btn btn-danger circle" %>
       <% end %>
     <% elsif !item.buyer %>
-      <%= link_to '关注小铺', new_message_path(:item_id => item.id), :class => "btn btn-danger circle" %>
       <%= link_to '联系卖家', new_message_path(:item_id => item.id), :class => "btn btn-danger circle" %>
     <% end %>
   </div>
@@ -120,6 +119,22 @@
 		clickable: false
 	});
 	$("div#map").html($(itemMapView.render().el));
+
+  //// HACK - Refactor later/////
+  var follow = new MyWebMarket.Models.Follow({shop_id: <%= item.shop.id %>});
+  <% if user_signed_in? && follow = item.shop.follows.select {|follow| follow.user_id == current_user.id}.first %>
+    follow.id = <%= follow.id %>;
+  <% end %>
+
+  var followView = new MyWebMarket.Views.FollowView({model: follow});
+  $("div#item-actions").append($(followView.render().el));
+
+  follow.bind("change:id", renderFollowButtn);
+  follow.bind("destroy", function(){
+    this.id = null;
+    renderFollowButtn();
+  });
+  /////////////////////////////
 
 	$("a.social-share").click(function(){
 		$("a.jiathis_button_renren").click();

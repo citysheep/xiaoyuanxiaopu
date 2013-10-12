@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
     if params[:item_id]
       item = Item.find(params[:item_id])
-      @recipient = item.user
+      @recipient = item.shop.user
       @message.subject = "我想買#{item.name}"
     end
 

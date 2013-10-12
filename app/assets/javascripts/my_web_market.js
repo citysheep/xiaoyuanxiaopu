@@ -17,4 +17,7 @@ $(document).ready(function(){
   });
 });
 
-
+function renderFollowButtn(){
+  $("div#follow-btn").html($(followView.render().el));
+  followView.delegateEvents();
+}

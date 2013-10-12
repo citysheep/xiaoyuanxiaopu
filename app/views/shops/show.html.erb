@@ -94,11 +94,6 @@
     renderFollowButtn();
   });
 
-  function renderFollowButtn(){
-    $("div#follow-btn").html($(followView.render().el));
-    followView.delegateEvents();
-  }
-
   $("a.social-share").click(function(){
     $("a.jiathis_button_renren").click();
   });
