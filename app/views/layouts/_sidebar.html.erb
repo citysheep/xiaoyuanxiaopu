@@ -18,7 +18,7 @@
     <h5>站内导航</h5>
     <ul>
       <li><%= link_to "创建小铺", new_shop_path, :class=>"btn btn-primary" %> <%= link_to "发布新货", new_item_path, :class=>"btn btn-primary"%></li>
-      <li><%= link_to "我的关注", follows_path, :class=>"btn btn-primary"%> <%= link_to "我的小铺", shops_path(:user_id => current_user.id), :class=>"btn btn-primary" %></li>
+      <li><%= link_to "我的关注", follows_path, :class=>"btn btn-primary"%> <%= link_to "我的小铺", "/my_shop", :class=>"btn btn-primary" %></li>
       <li><a data-toggle="modal" data-target="#map-modal" class="btn btn-primary">更改位置</a><li>
       <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
         <div class="modal-header">

@@ -3,7 +3,7 @@ require 'will_paginate/array'
 
 class ShopsController < ApplicationController
   geocode_ip_address
-  before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :my_shop]
 
   # GET /shops
   # GET /shops.json
@@ -30,7 +30,7 @@ class ShopsController < ApplicationController
     @shops = @shops.paginate(:page => params[:page])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index }
       format.json { render :json => @shops }
     end
   end
@@ -118,6 +118,11 @@ class ShopsController < ApplicationController
         format.json { head :ok }
       end
     end
+  end
+
+  def my_shop
+    params[:user_id] = current_user.id
+    index()
   end
 
   def is_shop_owner(shop_id)
