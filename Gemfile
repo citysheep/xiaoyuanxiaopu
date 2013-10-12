@@ -12,11 +12,15 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
+  gem 'flatui-rails'
   gem 'underscore-rails'
   gem 'execjs'
   gem 'libv8', '3.3.10.4'
   gem 'uglifier'
   gem 'backbone-on-rails'
+  gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
+  gem 'simple_form'
+  gem "bootstrap-will_paginate", "~> 0.0.9"
 end
 
 group :production do
@@ -37,10 +41,6 @@ gem 'paperclip', '~>2.7.0'
 
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 
-gem "bootstrap-will_paginate", "~> 0.0.9"
-
-gem 'simple_form'
-
 gem 'omniauth-renren'
 gem 'omniauth-qzone'
 gem 'omniauth-facebook'
@@ -48,5 +48,3 @@ gem 'renren'
 
 gem 'mina'
 
-gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
-gem 'flatui-rails'
