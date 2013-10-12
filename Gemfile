@@ -11,7 +11,6 @@ group :assets do
   gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails'
-  gem 'jquery-ui-rails'
   gem 'flatui-rails'
   gem 'underscore-rails'
   gem 'execjs'
@@ -40,6 +39,7 @@ gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/s
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'
 gem "bootstrap-will_paginate", "~> 0.0.9"
+gem 'jquery-ui-rails'
 
 gem 'omniauth-renren'
 gem 'omniauth-qzone'
