@@ -18,9 +18,6 @@ group :assets do
   gem 'libv8', '3.3.10.4'
   gem 'uglifier'
   gem 'backbone-on-rails'
-  gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
-  gem 'simple_form'
-  gem "bootstrap-will_paginate", "~> 0.0.9"
 end
 
 group :production do
@@ -40,6 +37,9 @@ gem 'devise'
 gem 'paperclip', '~>2.7.0'
 
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
+gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
+gem 'simple_form'
+gem "bootstrap-will_paginate", "~> 0.0.9"
 
 gem 'omniauth-renren'
 gem 'omniauth-qzone'
