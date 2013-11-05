@@ -83,21 +83,21 @@
     mapPopup.html($(mapView.render().el));
   });
 
-  <% if !session[:location] %>
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        function( position ){
-          map.set("location", new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-          setUrl(map);
-        },
-        function( error ){
-          // TODO
-        }
-    );
-  } else {
-    $("#map-modal").show();
-  }
-  <% end %>
+  <!--<% if !session[:location] %>-->
+//  if (navigator.geolocation) {
+//    navigator.geolocation.getCurrentPosition(
+//        function( position ){
+//          map.set("location", new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+//          setUrl(map);
+//        },
+//        function( error ){
+//          // TODO
+//        }
+//    );
+//  } else {
+//    $("#map-modal").show();
+//  }
+  <!--<% end %>-->
 
   //TODO - use backbone to handle all the views - should be ajax
   $("div.modal-footer > a.confirm").click(function(){
@@ -112,6 +112,6 @@
         locationParam = "?lat=" + latLng.lat() + "&lng=" + latLng.lng();
       }
     }
-    location.href = "/items" + locationParam;
+    location.href = "/nearby" + locationParam;
   }
 </script>
