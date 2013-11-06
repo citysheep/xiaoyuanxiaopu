@@ -26,9 +26,9 @@
   </p>
   <div class="pull-right sub-actions" id="shop-actions">
     <% if user_signed_in? && current_user.id == shop.user.id %>
-      <%= link_to '更新资料', edit_shop_path(shop), :class => "btn btn-danger circle" %>
+      <%= link_to '更新资料', edit_shop_path(shop), :class => "btn btn-info" %>
     <% end %>
-    <a data-toggle="modal" data-target="#shop-map-modal" class="btn btn-danger circle">显示位置</a>
+    <a data-toggle="modal" data-target="#shop-map-modal" class="btn btn-info">显示位置</a>
     <div class="modal hide fade" tabindex="-1" role="dialog" id="shop-map-modal">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -45,7 +45,6 @@
     <!-- JiaThis Button BEGIN -->
     <div class="jiathis_style_24x24">
       <span class="jiathis_txt">分享到：</span>
-      <a class="jiathis_button_ishare"></a>
       <a class="jiathis_button_weixin"></a>
       <a class="jiathis_button_tsina"></a>
       <a class="jiathis_button_douban"></a>
@@ -94,9 +93,6 @@
     renderFollowButtn();
   });
 
-  $("a.social-share").click(function(){
-    $("a.jiathis_button_renren").click();
-  });
 </script>
 <%= render "items/items" %>
 <div class="row center">

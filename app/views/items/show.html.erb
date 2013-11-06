@@ -27,13 +27,14 @@
 	</p>
   <div class="pull-right sub-actions" id="item-actions">
     <% if user_signed_in? && current_user.id == item.shop.user.id %>
-      <%= link_to '更新资料', edit_item_path(item), :class => "btn btn-danger circle" %>
+      <%= link_to '更新资料', edit_item_path(item), :class => "btn btn-info" %>
       <% if !item.buyer %>
-        <%= link_to '货物下架', item_path(item, :item => {:buyer => 1, :shop_id => item.shop.id}), :method => :put, :class => "btn btn-danger circle" %>
+        <%= link_to '货物下架', item_path(item, :item => {:buyer => 1, :shop_id => item.shop.id}), :method => :put, :class => "btn btn-info" %>
       <% end %>
     <% elsif !item.buyer %>
-      <%= link_to '联系卖家', new_message_path(:item_id => item.id), :class => "btn btn-danger circle" %>
+      <%= link_to '联系卖家', new_message_path(:item_id => item.id), :class => "btn btn-info" %>
     <% end %>
+    <a href="#" class="social-share btn btn-info hint" title="一键分享至各大社交网络">一键分享</a>
   </div>
 </div>
 <dl class="dl-horizontal">
@@ -59,7 +60,6 @@
 		<div class="row">
       <!-- JiaThis Button BEGIN -->
       <div class="jiathis_style_24x24">
-        <a class="jiathis_button_ishare"></a>
         <a class="jiathis_button_weixin"></a>
         <a class="jiathis_button_tsina"></a>
         <a class="jiathis_button_douban"></a>
@@ -92,12 +92,6 @@
 		<div class="row well" id="map"></div>
 	</div>
 </div>
-<!-- UJian Button BEGIN -->
-<!--<div class="ujian-hook"></div>-->
-<!--<script type="text/javascript">var ujian_config = {num:4};</script>-->
-<!--<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>-->
-<!--<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>-->
-<!-- UJian Button END -->
 <div class="row center">
 	<!-- <div class="fb-comments" data-href="<%= url %>" data-num-posts="3" data-width="600"></div> -->
 	<!-- UY BEGIN -->
@@ -136,8 +130,5 @@
   });
   /////////////////////////////
 
-	$("a.social-share").click(function(){
-		$("a.jiathis_button_renren").click();
-	});
 </script>
 

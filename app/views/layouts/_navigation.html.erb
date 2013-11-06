@@ -26,8 +26,7 @@
         </ul>
       </div>
       <form class="navbar-search" action="search">
-        <input type="search" data-provide="typeahead" class="span2 search-query" placeholder="想找什么呢？" />
-        <!--<button type="Submit"><i class="icon-search"></i></button>-->
+        <input name="search" type="search" data-provide="typeahead" class="span2 search-query" placeholder="想找什么呢？" />
         <a href="#" onclick="$(this).closest('form').submit(); return false;"><i class="icon-search"></i></a>
       </form>
 
@@ -56,7 +55,7 @@
 <script type="text/javascript">
 $('.search-query').typeahead({
     source: function (query, process) {
-        return $.get('/items.json', { query: query }, function (data) {
+        return $.get('/search.json', { search: query }, function (data) {
         	var names = _.map(data, function(d){ return d.name; });
             return process(names);
         });

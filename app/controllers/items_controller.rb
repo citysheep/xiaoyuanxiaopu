@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => items }
+      format.json { render :json => @items }
     end
   end
 
@@ -50,18 +50,12 @@ class ItemsController < ApplicationController
   end
 
   def search
-    location = curr_location
-    if params[:search]
-      @items = Item.search params[:search]
-    else
-      # @items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
-      @items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "buyer", "created_at desc")
-    end
-
+    @items = Item.search params[:search]
     @items = @items.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html { render :index }
+      format.json { render :json => @items }
     end
   end
 
