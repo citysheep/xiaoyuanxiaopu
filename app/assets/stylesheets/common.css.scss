@@ -49,11 +49,6 @@ img.thumbnail {
 	width: 300px;
 }
 
-//img.login {
-//	height: 25px;
-//	border:0px;
-//}
-
 div.toolbar {
 	font-size: 15px;
 	border-bottom: solid 2px #DCDCD5;
@@ -62,38 +57,6 @@ div.toolbar {
 	font-weight: bold;
 }
 
-//div.item, table, div.shop, div.toolbar {
-//	a {
-//		&:focus, &:hover {
-//			color: #0f698d;
-//		}
-//		&.btn {
-//			color: white;
-//		}
-//		color: #0d96cd;
-//		cursor: pointer;
-//		text-decoration: none;
-//		font-weight: bold;
-//	}
-//
-//	a.item-name, a.shop-name {
-//	  	text-decoration: none;
-//	  	color: #393E40;
-//		cursor: pointer;
-//	  	&:hover, &:focus {
-//			color: #0078a3;
-//		}
-//	}
-//}
-//
-//div.item-image-span {
-//  	padding-right: 20px;
-//}
-  
-div#share-bar {
-  	margin-left: 15px;
-}  
-
 div.alert-no-item {
   	margin-top: 50px;	
 }  
@@ -101,22 +64,16 @@ div.alert-no-item {
 div.renren-follow { text-align: center; }  
   
 div.navbar{
-//	div.btn-group {
-//		line-height: 55px;
-//	}
+
 	img.img-small {
 		width: 40px;
 	}
-//	a.brand, a.name {
-//	    color:white;
-//	}
+
 	form {
 	    line-height: 56px;
 	    margin-left: 20px;
 	}
-//	b.dropdown-icon {
-//		margin-top: 14px;
-//	}
+
 	ul.nav{
       li {
         a {
@@ -145,16 +102,6 @@ div.navbar{
       }
     }
 }
-//
-//.img-container {
-//	width: 150px;
-//	height: 150px;
-//	display: inline-block;
-//	overflow: hidden;
-//}
-//.img-container img {
-//	width: 100%;
-//}
 
 div.header {
 	margin-top: 20px;
