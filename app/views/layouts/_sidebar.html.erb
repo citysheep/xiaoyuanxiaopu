@@ -19,18 +19,6 @@
     <ul>
       <li><%= link_to "创建小铺", new_shop_path, :class=>"btn btn-primary" %> <%= link_to "发布新货", new_item_path, :class=>"btn btn-primary"%></li>
       <li><%= link_to "我的关注", follows_path, :class=>"btn btn-primary"%> <%= link_to "我的小铺", "/my_shop", :class=>"btn btn-primary" %></li>
-      <li><a data-toggle="modal" data-target="#map-modal" class="btn btn-primary">更改位置</a><li>
-      <div class="modal hide fade" tabindex="-1" role="dialog" id="map-modal">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3>请选择您的当前位置</h3>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer center">
-          <a href="#" class="btn btn-primary confirm">确定</a>
-        </div>
-      </div>
     </ul>
   </div>
 
@@ -59,59 +47,3 @@
 <!--<div class="row-fluid">-->
 	<!--<fb:like-box href="http://www.facebook.com/MyWebMarketCommunity" width="270" height="600" show_faces="true" stream="true" header="true"></fb:like-box>-->
 <!--</div>-->
-
-<script type = "text/javascript">
-  <% location = controller.curr_location %>
-  center = new google.maps.LatLng(<%= location[:lat] %>, <%= location[:lng] %>);
-  var map = new MyWebMarket.Models.Map({
-    zoom: 12,
-    center: center,
-    location: center,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-  var mapPopup = $("#map-modal > div.modal-body");
-  var mapView;
-  $('#map-modal').on('shown', function () {
-    if(!mapView){
-      mapView = new MyWebMarket.Views.MapView({
-        model: map,
-        clickable: true,
-        changable: true
-      });
-    }
-    mapPopup.html($(mapView.render().el));
-  });
-
-  <!--<% if !session[:location] %>-->
-//  if (navigator.geolocation) {
-//    navigator.geolocation.getCurrentPosition(
-//        function( position ){
-//          map.set("location", new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-//          setUrl(map);
-//        },
-//        function( error ){
-//          // TODO
-//        }
-//    );
-//  } else {
-//    $("#map-modal").show();
-//  }
-  <!--<% end %>-->
-
-  //TODO - use backbone to handle all the views - should be ajax
-  $("div.modal-footer > a.confirm").click(function(){
-    setUrl(map);
-  });
-
-  function setUrl(model) {
-    var locationParam = "";
-    if(model){
-      var latLng = model.get("location");
-      if(latLng){
-        locationParam = "?lat=" + latLng.lat() + "&lng=" + latLng.lng();
-      }
-    }
-    location.href = "/nearby" + locationParam;
-  }
-</script>

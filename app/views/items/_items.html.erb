@@ -7,6 +7,7 @@
 <% @items.each do |item| %>
   <%
      url = "http://www.xiaoyuanxiaopu.com/items/#{item.id}"
+     shop = item.shop
   %>
   <% created_time = item.created_at.localtime %>
   <div class="item-container row-fluid">
@@ -14,8 +15,8 @@
       <span class="month"><%= I18n.t("date.month_names")[created_time.month] %></span>
       <span class="day"><%=created_time.day %></span>
       <span class="year"><%=created_time.year %></span>
-      <span class="shop"><%= link_to item.shop.name, item.shop %></span>
-      <span class="shop-follow"><%= item.shop.follows.count %>关注<i class="fui-heart"></i></span>
+      <span class="shop"><%= link_to shop.name, shop %></span>
+      <span class="shop-follow"><%= shop.follows.count %>关注<i class="fui-heart"></i></span>
     </div>
     <div class="span10">
       <div class="row-fluid center">
@@ -28,8 +29,9 @@
       <h5>
         <%= link_to item.name, item %>
         <span class="tagsinput tags">
-          <span class="tag city"><%= item.shop.city.name %></span>
-          <span class="tag price">RMB<%= item.price %></span>
+          <span class="tag city"><%= shop.zone.city.name %></span>
+          <span class="tag zone"><%= shop.zone.name %></span>
+          <span class="tag price">¥<%= item.price %></span>
           <% if item.category %><span class="tag category"><%= item.category.name %></span><% end %>
           <% if item.buyer %><span class="tag soldout">已下架</span><% end %>
         </span>

@@ -1,7 +1,5 @@
 MyWebMarket::Application.routes.draw do 
 
-  resources :cities
-
   resources :follows
 
   devise_for :users do
@@ -30,7 +28,6 @@ MyWebMarket::Application.routes.draw do
 
   root :to => 'items#index'
 
-  match 'location' => 'locations#get'
   match 'search' => 'items#search'
   match 'vote' => 'shops#show_shop_for_vote'
   match 'nearby' => 'items#nearby'

@@ -239,16 +239,19 @@ span.tags {
       padding: 2px 6px;
     }
     &.city {
-      background-color: #3498DB;
+      background-color: #3498db;
+    }
+    &.zone {
+      background-color: #1ABC9C;
     }
     &.category {
-      background-color: #9B59B6;
+      background-color: #2ecc71;
     }
     &.soldout {
       background-color: #E67E22;
     }
     &.price {
-      background-color: #1ABC9C;
+      background-color: #9b59b6;
     }
     &.follows {
       background-color: #1ABC9C;

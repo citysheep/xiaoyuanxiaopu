@@ -17,7 +17,7 @@
        item = shop.items.last
     %>
     <div class="span4 shop">
-      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <span class="label label-info"><% if shop.city %><%= shop.city.name %><% end %></span></h3>
+      <h3><%= link_to shop.name, shop, :class => "shop-name" %> <span class="label label-info"><%= shop.zone.city.name %> <%= shop.zone.name %></span></h3>
       <p><small><%= shop.following_users.count %>关注 | <%= shop.items.count %>件货</small></p>
       <% if item %>
         <% if item.photo.file? %>

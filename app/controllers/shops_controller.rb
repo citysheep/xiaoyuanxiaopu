@@ -2,32 +2,16 @@
 require 'will_paginate/array'
 
 class ShopsController < ApplicationController
-  geocode_ip_address
   before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :my_shop]
 
   # GET /shops
   # GET /shops.json
   def index
-    if params[:lat] && params[:lng]
-      session[:location] = {
-        :lat => params[:lat],
-        :lng => params[:lng]
-      }
-    end
-
-    location = curr_location
-    # @shops = Shop.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "created_at DESC")
-    @shops = Shop.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at DESC")
-
     if params[:user_id]
-      @shops = @shops.where(:user_id=>params[:user_id])
+      @shops = Shop.where(:user_id=>params[:user_id])
       @page_title = "#{User.find(params[:user_id]).name}的小铺"
-    else
-      @shops = @shops.select{|s| s.items.count > 0}
-      @page_title = "您附近的小铺"
+      @shops = @shops.paginate(:page => params[:page])
     end
-
-    @shops = @shops.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html { render :index }
@@ -42,7 +26,7 @@ class ShopsController < ApplicationController
       authenticate_user!
     end
     @shop = Shop.find(params[:id])
-    @items = @shop.items.order("buyer", "created_at desc").paginate(:page => params[:page])
+    @items = @shop.items.order('buyer', 'created_at desc').paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -73,15 +57,13 @@ class ShopsController < ApplicationController
   def create
     params[:shop][:user_id] = current_user.id
     @shop = Shop.new(params[:shop])
-    @shop.city_id = City.geo_scope(:origin => @shop, :within => 15).order("distance asc").first.id
 
-    @popup = true
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to @shop, :notice => "<h4>恭喜！您的小铺成功开张啦！<a class='social-share'>点击这里和好友分享</a></h4><p>但是<strong>只有发布过货物的小铺才可以显示在首页</strong>哦。您可以#{view_context.link_to('点击这里', new_item_path)}发布新货。".html_safe }
+        format.html { redirect_to @shop, :notice => "<h4>恭喜！你的小铺“#{@shop.name}”成功开张啦！<a class='social-share'>点击这里和好友分享</a></h4><h6>只有发布过货物的小铺才可以显示在首页哦。你可以#{view_context.link_to('点击这里', new_item_path)}发布新货。</h6>".html_safe }
         format.json { render :json => @shop, :status => :created, :location => @shop }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.json { render :json => @shop.errors, :status => :unprocessable_entity }
       end
     end
@@ -92,14 +74,13 @@ class ShopsController < ApplicationController
   def update
     if is_shop_owner params[:id]
       @shop = Shop.find(params[:id])
-      params[:shop][:city_id] = City.geo_scope(:origin => @shop, :within => 15).order("distance asc").first.id
 
       respond_to do |format|
         if @shop.update_attributes(params[:shop])
           format.html { redirect_to @shop, :notice => '小铺资料成功更新啦！' }
           format.json { head :ok }
         else
-          format.html { render :action => "edit" }
+          format.html { render :action => 'edit' }
           format.json { render :json =>  @shop.errors, :status => :unprocessable_entity }
         end
       end
@@ -129,7 +110,4 @@ class ShopsController < ApplicationController
     current_user.shops.any? { |shop| shop.id.to_s == shop_id }
   end
 
-  def geo_address(lat, lng)
-    (Geokit::Geocoders::GoogleGeocoder.reverse_geocode [lat, lng]).full_address
-  end
 end

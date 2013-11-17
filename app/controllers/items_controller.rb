@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   layout "application"
   before_filter :get_item, :only => [:show, :edit, :update, :destroy, :soldout]
   before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :soldout]
-  
+
   def get_item
     @item = Item.find(params[:id])
   end
@@ -22,18 +22,9 @@ class ItemsController < ApplicationController
   end
 
   def nearby
-    if params[:lat] && params[:lng]
-      session[:location] = {
-          :lat => params[:lat],
-          :lng => params[:lng]
-      }
-    end
-
-    location = curr_location
-    items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at desc")
-    # items = Item.geo_scope(:origin=>[@lat, @lng], :within=>10000).order("distance asc", "buyer", "created_at desc")
-
-    @items = filter_items(items);
+    session[:location] = params[:zone_id]
+    #items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at desc")
+    @items = filter_items(Item.where(:zone_id => params[:zone_id]))
 
     respond_to do |format|
       format.html { render :index }
@@ -95,13 +86,9 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     shop = Shop.find(params[:item][:shop_id])
-    params[:item].merge!({
-      lat: shop.lat,
-      lng: shop.lng,
-    })
+    params[:item].merge!({ zone_id: shop.zone.id})
 
     @item = Item.new(params[:item])
-    @popup = true
 
     respond_to do |format|
       if @item.save
@@ -120,10 +107,8 @@ class ItemsController < ApplicationController
     if is_owner (@item)
       respond_to do |format|
         shop = Shop.find(params[:item][:shop_id])
-        params[:item].merge!({
-                                 lat: shop.lat,
-                                 lng: shop.lng,
-                             })
+        params[:item].merge!({ zone_id: shop.zone.id})
+
         if @item.update_attributes(params[:item])
           format.html { redirect_to @item, :notice => '货物成功更新啦！' }
           format.json { head :ok }
