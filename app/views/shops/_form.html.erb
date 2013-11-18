@@ -23,7 +23,7 @@
                 <% city.zones.each do |z| %>
                   <div class="span2">
                     <label class="radio">
-                      <input class="radio_buttons optional" name="nav[zone_id]" type="radio" value="<%= z.id %>"><%= z.name%>
+                      <input class="radio_buttons optional" name="shop[zone_id]" type="radio" value="<%= z.id %>"><%= z.name%>
                       <input type="hidden" value="<%= city.name + z.name %>">
                     </label>
                   </div>
