@@ -1,4 +1,48 @@
 <div class="page-header">
   <h1>更新小铺资料</h1>
 </div>
-<%= render 'form' %>
+<%= simple_nested_form_for @shop, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, :label => '店铺大名', :hint => '给自己的小铺取一个好听的名字' %>
+    <%= f.input :description, :as => :text, :input_html => { :class => "span4", :rows => "6" }, :label => '店铺描述', :hint => '简单描述一下自己的小铺' %>
+    <div class="control-group string optional shop_zone">
+      <label class="string optional control-label">店铺位置</label>
+      <div class="controls">
+        <% zone = @shop.zone %>
+        <span id="shop-zone-text"><%= zone.city.name + zone.name %></span> <a data-toggle="modal" data-target="#shop-zone-modal" id="choose-zone-btn">点击选择位置</a>
+        <p class="help-block">方便你附近的同鞋们找到你的小铺</p>
+      </div>
+      <div class="modal hide fade" tabindex="-1" role="dialog" id="shop-zone-modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>小铺位置</h3>
+        </div>
+        <div class="modal-body" id="choose-zone-modal">
+          <% City.all.each do |city| %>
+            <% if city.zones.size > 0 %>
+              <h4><%= city.name %></h4>
+              <div class="row">
+                <% city.zones.each do |z| %>
+                  <div class="span2">
+                    <label class="radio">
+                      <input <% if z.id == zone.id %>checked="checked"<% end %>class="radio_buttons optional" name="shop[zone_id]" type="radio" value="<%= z.id %>"><%= z.name%>
+                      <input type="hidden" value="<%= city.name + z.name %>">
+                    </label>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer center">
+          <a href="#" class="btn btn-primary confirm">确定</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary', :value => '提交' %>
+  </div>
+<% end %>

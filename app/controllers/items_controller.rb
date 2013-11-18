@@ -22,9 +22,8 @@ class ItemsController < ApplicationController
   end
 
   def nearby
-    session[:location] = params[:zone_id]
-    #items = Item.geo_scope(:origin=>[location[:lat], location[:lng]]).order("distance asc", "created_at desc")
-    @items = filter_items(Item.where(:zone_id => params[:zone_id]))
+    cookies[:zone] = params[:zone]
+    @items = filter_items(Item.where(:zone_id => params[:zone]))
 
     respond_to do |format|
       format.html { render :index }

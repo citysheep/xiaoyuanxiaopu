@@ -6,16 +6,12 @@
       <div class="nav-collapse collapse" id="nav-collapse-01">
         <ul class="nav">
           <li class="<%= 'active' if params[:controller] == 'items' && params[:action] == 'index' %>">
-            <%= link_to "最新货物", items_path %>
+            <%= link_to '最新货物', items_path %>
           </li>
           <li class="<%= 'active' if params[:controller] == 'items' && params[:action] == 'nearby' %>">
-            <%= link_to "附近货物", "/nearby" %>
+            <a id="nearby-items-link">附近货物</a>
           </li>
-          <!--<li class="<%= 'active' if params[:controller] == 'shops' && params[:action] == 'index' %>">-->
-            <!--<%= link_to "周边小铺", shops_path %>-->
-          <!--</li>-->
           <% if user_signed_in? %>
-            <!--<li class="<%= 'active' if params[:controller] == 'follows' %>"><a class="hint" href="<%= follows_path %>">我的关注</a></li>-->
             <li class="<%= 'active' if params[:controller] == 'messages' %>">
               <a class="hint" href="/messages">我的信箱</a>
               <% if user_signed_in? && current_user.unread_message_count > 0 %>
@@ -46,9 +42,38 @@
             <li><%= link_to "注册", new_registration_path(:user) %></li>
             <li><%= link_to "登入", new_session_path(:user) %></li>
           <% end %>
+          <% if cookies[:zone] %>
+            <% zone = Zone.find(cookies[:zone]) %>
+            <li><a href="#" class="hint" id="change-zone-btn" data-placement="bottom" title="点击更改你的当前位置"><%= zone.city.name + zone.name %></a></li>
+          <% end %>
         </ul>
       </div>
     </div>
+  </div>
+</div>
+<div class="modal hide fade" tabindex="-1" role="dialog" id="current-zone-modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>请选择你的当前位置</h3>
+  </div>
+  <div class="modal-body" id="choose-zone-modal">
+    <% City.all.each do |city| %>
+      <% if city.zones.size > 0 %>
+        <h4><%= city.name %></h4>
+        <div class="row">
+          <% city.zones.each do |z| %>
+            <div class="span2">
+              <label class="radio">
+                <input class="radio_buttons optional" name="nav[zone]" type="radio" value="<%= z.id %>"><%= z.name%>
+              </label>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="modal-footer center">
+    <a href="#" class="btn btn-primary confirm">确定</a>
   </div>
 </div>
 

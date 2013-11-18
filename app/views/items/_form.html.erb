@@ -1,20 +1,25 @@
 <%= simple_form_for @item, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
-  <%= f.input :name, :input_html => { :class => "span4"}, :label => "货物名称" %>
-  <%= f.input :price, :input_html => { :class => "span4"}, :label => "价格" %>
-  <% shops = current_user.shops.collect {|s| [s.id, s.name]} %>
-  <%= f.input :shop_id,
-              :label => "小铺",
-              :collection => shops,
-              :label_method => :last,
-              :value_method => :first,
-              :checked => shops.first,
-              :as => :radio %>
-
-  <%= f.input :category_id, :label => "分类", :collection => Category.all, :default => 1, :input_html => {:class=>"select-block span3"} %>
-  <%= f.input :photo, :input_html => { :class => "span4"}, :label => "图片" %>
-  <%= f.input :description, :as => :text, :input_html => { :class => "span4", :rows => "6" }, :label => "描述" %>
+  <%= f.input :name, :input_html => { :class => 'span4'}, :label => '货物名称' %>
+  <%= f.input :price, :input_html => { :class => 'span4'}, :label => '货物价格' %>
+  <div class="control-group radio_buttons optional item_shop_id">
+    <label class="radio_buttons optional control-label">货物小铺</label>
+    <div class="controls">
+      <div class="row">
+        <% current_user.shops.each do |s| %>
+          <div class="span2">
+            <label class="radio">
+              <input class="radio_buttons optional" name="item[shop_id]" type="radio" value="<%= s.id %>"><%= s.name%>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= f.input :photo, :input_html => { :class => 'span4'}, :label => '货物图片' %>
+  <%= f.input :category_id, :label => '货物分类', :collection => Category.all, :default => 1, :input_html => {:class=>"select-block span3"} %>
+  <%= f.input :description, :as => :text, :input_html => { :class => 'span4', :rows => '6'}, :label => '货物描述' %>
   <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary", :value => "确定" %>
-    <%= submit_tag "重设", :type => :reset, :class => "btn btn-info" %>
+    <%= f.button :submit, :class => 'btn-primary', :value => '确定' %>
+    <%= submit_tag '重设', :type => :reset, :class => 'btn btn-info' %>
   </div>
 <% end %>

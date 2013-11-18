@@ -17,6 +17,7 @@ group :assets do
   gem 'libv8', '3.3.10.4'
   gem 'uglifier'
   gem 'backbone-on-rails'
+  gem 'jquery-cookie-rails'
 end
 
 group :production do

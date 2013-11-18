@@ -8,8 +8,8 @@
   <%
      url = "http://www.xiaoyuanxiaopu.com/items/#{item.id}"
      shop = item.shop
+     created_time = item.created_at.localtime
   %>
-  <% created_time = item.created_at.localtime %>
   <div class="item-container row-fluid">
     <div class="span2 sidebar">
       <span class="month"><%= I18n.t("date.month_names")[created_time.month] %></span>

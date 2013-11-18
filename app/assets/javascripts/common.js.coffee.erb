@@ -1,0 +1,22 @@
+$ ->
+  redirectToNearbyItems = (zone) ->
+    location.href = '/nearby?zone=' + zone;
+
+  $currentZoneModal = $("#current-zone-modal")
+
+  $nearbyLink = $('#nearby-items-link')
+  $nearbyLink.click () ->
+    zone = $.cookie('zone')
+    if zone != null
+      redirectToNearbyItems(zone)
+    else
+      $currentZoneModal.modal('show')
+
+  $changeZoneBtn = $("#change-zone-btn")
+  $changeZoneBtn.click () ->
+    $currentZoneModal.modal('show')
+
+  $("#current-zone-modal div.modal-footer > a.confirm").click () ->
+    redirectToNearbyItems($("input[name='nav[zone]']:checked").val())
+
+
