@@ -9,4 +9,9 @@ class Shop < ActiveRecord::Base
   accepts_nested_attributes_for :items, :allow_destroy => true
 
   self.per_page = 6
+
+  def self.within_zone(zone)
+    Shop.where(:zone_id => zone)
+  end
+
 end
