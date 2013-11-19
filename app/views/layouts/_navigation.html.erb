@@ -57,7 +57,7 @@
     <h3>请选择你的当前位置</h3>
   </div>
   <div class="modal-body" id="choose-zone-modal">
-    <% City.all.each do |city| %>
+    <% City.order('name asc').each do |city| %>
       <% if city.zones.size > 0 %>
         <h4><%= city.name %></h4>
         <div class="row">

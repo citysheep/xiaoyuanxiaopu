@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require 'will_paginate/array' 
+require 'will_paginate/array'
 
 class ItemsController < ApplicationController
   layout "application"
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = filter_items(Item.order("created_at desc"));
+    @items = filter_items(Item.order('created_at desc'));
 
     respond_to do |format|
       format.html # index.html.erb

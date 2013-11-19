@@ -16,7 +16,7 @@
           <h3>小铺位置</h3>
         </div>
         <div class="modal-body" id="choose-zone-modal">
-          <% City.all.each do |city| %>
+          <% City.order('name asc').each do |city| %>
             <% if city.zones.size > 0 %>
               <h4><%= city.name %></h4>
               <div class="row">
