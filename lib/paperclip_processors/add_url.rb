@@ -13,9 +13,6 @@ module Paperclip
       dst = Tempfile.new([@basename, @format].compact.join('.'))
       dst.binmode
 
-      #command = "composite"
-      #params = "-gravity SouthWest '/Users/rui/Desktop/logo_new.jpg' #{from_file} #{to_file(dst)}"
-
       command = 'convert'
       font_path = Rails.root.join('app', 'assets', 'fonts', 'wqy-microhei.ttc')
       params = "-gravity SouthWest -fill white -draw \"font '#{font_path}' font-size 14 text 10,5 '校园小铺 xiaoyuanxiaopu.com'\" #{from_file} #{to_file(dst)}"
