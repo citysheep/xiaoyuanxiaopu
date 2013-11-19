@@ -21,7 +21,7 @@
     <div class="span10">
       <div class="row-fluid center">
         <% if item.photo.file? %>
-          <%= image_tag item.photo.url(:small), :class=>"img-rounded" %>
+          <%= image_tag item.photo.url, :class=>"img-rounded" %>
         <% else %>
           <%= image_tag "noimage.jpg", :class=>"img-rounded" %>
         <% end %>

@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
   belongs_to :shop
   belongs_to :zone
 
-  has_attached_file :photo, :styles => { :original => '400x400>', :small => '360x360>' }, :processors => [:thumbnail, :add_url]
+  has_attached_file :photo, :styles => { :original => '500x500>' }, :processors => [:thumbnail, :add_url]
   validates_attachment_presence :photo
   attr_accessible :name, :price, :description, :shop_id, :category_id, :zone_id, :photo
 
