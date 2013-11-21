@@ -1,4 +1,24 @@
 $ ->
+
+  $("a.hint").tooltip('hide')
+  itemArray = $("#item-form").serializeArray()
+  item = {}
+  _.each(itemArray, (it) ->
+    item[it.name] = it.value || ''
+  )
+
+  $("a.social-share").click (event) ->
+    url = encodeURIComponent(item.url)
+    pic = encodeURIComponent(item.pic)
+    title = item.name + "只要" + item.price
+    description = "校园小铺 一键分享至各大社交网络 帮你轻松发布二手货信息"
+
+    window.open('http://service.weibo.com/share/share.php?title=' + title + '。' + description + '&url=' + url + '&pic=' + pic, '', 'width=600,height=500')
+    window.open('http://widget.renren.com/dialog/share?description=' + description + '&title=' + title + '&resourceUrl=' + url + '&pic=' + pic + '&srcUrl=' + url, '', 'width=600,height=500')
+    window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title + '&pics=' + pic + '&summary=' + description, '', 'width=600,height=500')
+
+    $("a.jiathis_button_weixin").click()
+
   redirectToNearbyItems = (zone) ->
     location.href = '/nearby?zone=' + zone;
 

@@ -36,7 +36,7 @@
     <% elsif !item.buyer %>
       <%= link_to '联系卖家', new_message_path(:item_id => item.id), :class => "btn btn-info" %>
     <% end %>
-    <a href="#" class="social-share btn btn-info hint" title="一键分享至各大社交网络">一键分享</a>
+    <a href="#" class="social-share btn btn-info hint" title="一键分享至微博、微信、QQ空间和人人网">一键分享</a>
   </div>
 </div>
 <dl class="dl-horizontal">
@@ -55,6 +55,17 @@
 		</div>
 	</dd>
 </dl>
+<%
+   pic_url = "http://www.xiaoyuanxiaopu.com/#{item.photo.url}"
+%>
+<form id="item-form">
+  <input type="hidden" name="name" value="<%= item.name%>"/>
+  <input type="hidden" name="id" value="<%= item.id %>"/>
+  <input type="hidden" name="price" value="<%= item.price %>"/>
+  <input type="hidden" name="description" value="<%= item.description %>"/>
+  <input type="hidden" name="url" value="<%= "http://www.xiaoyuanxiaopu.com/items/#{item.id}" %>"/>
+  <input type="hidden" name="pic" value="<%= pic_url %>" />
+</form>
 <div class="row item-action">
 	<div class="span2">
 	</div>
@@ -72,9 +83,6 @@
         <a class="jiathis_button_miliao"></a>
         <a class="jiathis_counter_style"></a>
       </div>
-      <%
-        pic_url = item.photo.file? ? "http://www.xiaoyuanxiaopu.com/#{item.photo.url}" : "http://www.xiaoyuanxiaopu.com/assets/logo_new.jpg"
-      %>
 			<script type="text/javascript" >
 			var jiathis_config={
 				url:"http://www.xiaoyuanxiaopu.com/items/<%= item.id %>",
