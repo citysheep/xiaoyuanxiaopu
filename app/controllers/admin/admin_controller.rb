@@ -1,3 +1,3 @@
 class Admin::AdminController < ApplicationController
-  before_filter :is_admin
+  before_filter :authenticate_admin!
 end

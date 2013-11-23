@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -31,6 +32,12 @@ class ApplicationController < ActionController::Base
 
   def is_admin
     user_signed_in? && current_user.is_admin
+  end
+
+  def authenticate_admin!
+    unless is_admin
+      redirect_to new_session_path(:user, :redirect => request.path), :alert => '你必须是管理员'
+    end
   end
 
 end
