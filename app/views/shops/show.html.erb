@@ -31,7 +31,7 @@
     <% end %>
   </div>
   <%
-     pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.xiaoyuanxiaopu.com/#{shop.items.last.photo.url}" : "http://www.xiaoyuanxiaopu.com/assets/logo_new.jpg"
+     pic_url = shop.items.last && shop.items.last.photo.file? ? "http://www.xiaoyuanxiaopu.com/#{shop.items.last.photo.url}" : "http://www.xiaoyuanxiaopu.com/assets/logo_new.png"
   %>
   <div id="share-bar" onmouseover="setShare('<%= url %>', '向你推荐一个校园小铺: <%= shop.name %>', '校园小铺 － 开小铺 交朋友 轻轻松松做买卖', '<%= pic_url %>');">
     <!-- JiaThis Button BEGIN -->
