@@ -1,44 +1,31 @@
 MyWebMarket::Application.routes.draw do 
 
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
+  resources :users
+  resources :messages
+  resources :shops
+  resources :items
   resources :follows
 
-  devise_for :users do
-    get "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
+  namespace :admin do
+    resources :categories
+    resources :cities
+    resources :zones
   end
-
-  resources :users do
-    resources :messages
-  end
-
-  resources :users do
-    resources :shops
-  end
-
-  resources :messages
-
-  resources :categories
-
-  resources :shops
-
-  resources :items
-  
-  resources :categories do
-    resources :items
-  end  
 
   root :to => 'items#index'
 
-  match 'search' => 'items#search'
-  match 'vote' => 'shops#show_shop_for_vote'
-  match 'nearby' => 'items#nearby'
-  match 'my_shop' => 'shops#my_shop'
+  get 'search' => 'items#search'
+  get 'vote' => 'shops#show_shop_for_vote'
+  get 'nearby' => 'items#nearby'
+  get 'my_shop' => 'shops#my_shop'
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
-  # devise_for :users do
-  #   get '/users/sign_in', :to => 'devise/sessions#new', :as => :new_user_session
-  #   get '/users/sign_out' => 'devise/sessions#destroy', :as => :user_sign_out
-  # end    
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

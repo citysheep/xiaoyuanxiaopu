@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :confirmable
 
   # # Setup accessible (or protected) attributes for your model
-  # attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  #attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   has_many :items
   has_many :shops
@@ -29,5 +29,9 @@ class User < ActiveRecord::Base
     user.skip_confirmation! 
     user.save!
     user
+  end
+
+  def is_admin
+    admin == 1
   end
 end

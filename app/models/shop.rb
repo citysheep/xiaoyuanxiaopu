@@ -5,6 +5,7 @@ class Shop < ActiveRecord::Base
   has_many :follows
   has_many :following_users, :through => :follows, :source => :user
   has_attached_file :picture, :styles => { :original => '300x300>', :small => '50x50>' }
+  validates :name, :user_id, :zone_id, presence: true
   attr_accessible :name, :user_id, :zone_id, :description, :items_attributes
   accepts_nested_attributes_for :items, :allow_destroy => true
 

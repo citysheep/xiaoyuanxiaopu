@@ -1,0 +1,20 @@
+<%= render 'admin/admin_navbar' %>
+<table class="table table-hover">
+  <tr>
+    <th>城市名</th>
+    <th>行政区名</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @zones.each do |zone| %>
+    <tr>
+      <td><%= zone.city.name %></td>
+      <td><%= zone.name %></td>
+      <td><%= link_to '修改', edit_admin_zone_path(zone) %></td>
+      <td><%= link_to '删除', admin_zone_path(zone), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= link_to '添加行政区', new_admin_zone_path, :class => 'btn btn-primary' %>
+

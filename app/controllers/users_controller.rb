@@ -9,9 +9,5 @@
     	@user = User.find(params[:id])
     end
   end
- 
-  private
-  	def is_admin
-  	  @user.admin == 1
-  	end  
+
 end

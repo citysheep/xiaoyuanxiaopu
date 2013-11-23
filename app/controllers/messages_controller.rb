@@ -1,9 +1,8 @@
 # encoding: UTF-8
 class MessagesController < ApplicationController
     
-  before_filter :authenticate_user!
-  before_filter :set_user
-  
+  before_filter :authenticate_user!, set_user
+
   def index
     if params[:mailbox] == "sent"
       @messages = @user.sent_messages
@@ -45,7 +44,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       SiteMailer.notification_email(@message).deliver
-      flash[:notice] = "信息發送成功！"
+      flash[:notice] = '信息發送成功！'
       redirect_to messages_path
     else
       render :action => :new
@@ -53,9 +52,9 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = Message.find(:first, :conditions => ["messages.id = ? AND (sender_id = ? OR recipient_id = ?)", params[:id], @user, @user])
-    @message.mark_deleted(@user) unless @message.nil?  
-    flash[:notice] = "信息刪除成功！"
+    @message = Message.where("messages.id = #{params[:id]} AND (sender_id = #{@user.id} OR recipient_id = #{@user.id})").first
+    @message.mark_deleted(@user) unless @message.nil?
+    flash[:notice] = '信息刪除成功！'
     redirect_to :back
   end
 

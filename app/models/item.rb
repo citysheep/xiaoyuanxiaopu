@@ -6,8 +6,8 @@ class Item < ActiveRecord::Base
 
   has_attached_file :photo, :styles => { :original => '500x500>' }, :processors => [:thumbnail, :add_url]
   validates_attachment_presence :photo
+  validates :name, :price, :shop_id, :zone_id, presence: true
   attr_accessible :name, :price, :description, :shop_id, :category_id, :zone_id, :photo
-
   self.per_page = 6
 
 	def self.search(search)

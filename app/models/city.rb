@@ -1,4 +1,7 @@
 class City < ActiveRecord::Base
   has_many :zones
-  acts_as_mappable
+
+  def self.sort_by_name
+    City.order('name asc')
+  end
 end

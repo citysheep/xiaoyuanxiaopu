@@ -1,6 +1,14 @@
 $ ->
 
   $("a.hint").tooltip('hide')
+
+  $('.search-query').typeahead {
+      source: (query, process) ->
+        $.get '/search.json', {search: query }, (data) ->
+          names = _.map(data, (d) -> d.name )
+          process(names)
+    }
+
   itemArray = $("#item-form").serializeArray()
   item = {}
   _.each(itemArray, (it) ->

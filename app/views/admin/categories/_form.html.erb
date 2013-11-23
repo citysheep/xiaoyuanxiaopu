@@ -1,0 +1,19 @@
+<%= simple_form_for([:admin, @category], :html => { :class => 'form-horizontal' }) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, 'error') %> prohibited this category from being saved:</h2>
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.input :name, :wrapper => :prepend, :label => false do %> 
+    <label>分类名称</label>
+    <%= f.input_field :name %>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary', :value => '确定' %>
+  </div>
+<% end %>

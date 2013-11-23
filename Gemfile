@@ -11,8 +11,8 @@ group :assets do
   gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails'
-  gem 'flatui-rails'
   gem 'underscore-rails'
+  gem 'flatui-rails'
   gem 'execjs'
   gem 'libv8', '3.3.10.4'
   gem 'uglifier'
@@ -29,13 +29,8 @@ group :development do
 end
 
 gem "mysql2"
-
-gem 'geokit-rails3'
-
 gem 'devise'
-
 gem 'paperclip', '~>2.7.0'
-
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'

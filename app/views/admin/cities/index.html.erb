@@ -1,0 +1,18 @@
+<%= render 'admin/admin_navbar' %>
+<table class="table table-hover">
+  <tr>
+    <th>城市名</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @cities.each do |city| %>
+    <tr>
+      <td><%= city.name %></td>
+      <td><%= link_to '修改', edit_admin_city_path(city) %></td>
+      <td><%= link_to '删除', admin_city_path(city), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= link_to '添加新城市', new_admin_city_path, :class => 'btn btn-primary' %>
+

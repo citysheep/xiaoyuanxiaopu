@@ -1,0 +1,7 @@
+<ul class="breadcrumb">
+  <li><%= link_to '管理货物分类', admin_categories_path, :class => params[:controller]=='admin/categories' ? :active : nil %></li>
+  <span class="divider">｜</span>
+  <li><%= link_to '管理城市', admin_cities_path, :class => params[:controller]=='admin/cities' ? :active : nil  %></li>
+  <span class="divider">｜</span>
+  <li><%= link_to '管理行政区', admin_zones_path, :class => params[:controller]=='admin/zones' ? :active : nil  %></li>
+</ul>
