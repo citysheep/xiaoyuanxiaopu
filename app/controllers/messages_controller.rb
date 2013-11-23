@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class MessagesController < ApplicationController
     
-  before_filter :authenticate_user!, set_user
+  before_filter :authenticate_user!, :set_user
 
   def index
     if params[:mailbox] == "sent"
