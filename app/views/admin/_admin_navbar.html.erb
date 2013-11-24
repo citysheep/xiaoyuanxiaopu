@@ -4,4 +4,6 @@
   <li><%= link_to '管理城市', admin_cities_path, :class => params[:controller]=='admin/cities' ? :active : nil  %></li>
   <span class="divider">｜</span>
   <li><%= link_to '管理行政区', admin_zones_path, :class => params[:controller]=='admin/zones' ? :active : nil  %></li>
+  <span class="divider">｜</span>
+  <li><%= link_to '查看用户', users_path, :class => params[:controller]=='users' ? :active : nil  %></li>
 </ul>

@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
 
   def nearby
     cookies[:zone] = params[:zone]
-    @items = filter_items(Item.where(:shop_id => Shop.within_zone(params[:zone]).collect {|s| s.id}))
+    @items = filter_items(Item.where(:shop_id => Shop.within_zone(params[:zone]).collect {|s| s.id}).order('created_at desc'))
 
     respond_to do |format|
       format.html { render :index }

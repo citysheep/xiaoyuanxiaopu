@@ -1,0 +1,20 @@
+<%= render 'admin/admin_navbar' %>
+<table class="table table-hover">
+  <tr>
+    <th>用户名</th>
+    <th>邮箱</th>
+    <th>管理员</th>
+    <th>上次登陆时间</th>
+    <th>上次登陆IP</th>
+  </tr>
+  <% @users.each do |u| %>
+    <tr>
+      <td><%= u.name %></td>
+      <td><%= u.email ? u.email : '无' %></td>
+      <td><%= u.is_admin ? 'Yes' : 'No' %></td>
+      <td><%= u.last_sign_in_at %></td>
+      <td><%= u.last_sign_in_ip %></td>
+    </tr>
+  <% end %>
+</table>
+
