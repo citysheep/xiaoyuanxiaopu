@@ -29,7 +29,7 @@ gem 'paperclip', '~>2.7.0'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'
-gem "bootstrap-will_paginate", "~> 0.0.9"
+gem 'bootstrap-will_paginate', '~> 0.0.9'
 gem 'jquery-ui-rails'
 
 gem 'omniauth-renren'
