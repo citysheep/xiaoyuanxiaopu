@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '~> 4.1.0'
+gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,7 +27,6 @@ group :development do
   gem "sqlite3-ruby", "~> 1.3.3"
 end
 
-gem "mysql2"
 gem 'devise'
 gem 'paperclip', '~>2.7.0'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
@@ -39,6 +39,4 @@ gem 'omniauth-renren'
 gem 'omniauth-qzone'
 gem 'omniauth-facebook'
 gem 'renren'
-
-gem 'mina'
 
