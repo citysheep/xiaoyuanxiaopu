@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
+gem 'puma'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,10 +22,6 @@ end
 
 group :production do
   gem 'therubyracer', '0.10.2'
-end
-
-group :development do
-  gem "sqlite3-ruby", "~> 1.3.3"
 end
 
 gem 'devise'
