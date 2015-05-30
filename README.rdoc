@@ -1,3 +1,3 @@
-#校园小铺 - My First Rails Project
+校园小铺 - My First Rails Project
 
 I built this flea market for university students in late 2012 when I started to learn Ruby on Rails.
